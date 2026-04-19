@@ -1,0 +1,179 @@
+{%- comment -%}sections/image-banner.liquid — Hearth Theme{%- endcomment -%}
+{%- liquid
+  assign scheme = section.settings.color_scheme
+  assign img_pos = section.settings.image_focal_point
+  assign txt_side = section.settings.text_position
+  assign has_image = false
+  if section.settings.image != blank
+    assign has_image = true
+  endif
+  case txt_side
+    when 'left'
+      assign txt_class = 'ib__content--left'
+    when 'right'
+      assign txt_class = 'ib__content--right'
+    when 'bottom-left'
+      assign txt_class = 'ib__content--bottom-left'
+    when 'bottom-right'
+      assign txt_class = 'ib__content--bottom-right'
+    else
+      assign txt_class = 'ib__content--center'
+  endcase
+  assign has_cta = false
+  if section.settings.button_1_label != blank
+    assign has_cta = true
+  endif
+  if section.settings.button_2_label != blank
+    assign has_cta = true
+  endif
+-%}
+<section id="image-banner-{{ section.id }}" class="ib ib--{{ scheme }}" aria-label="{{ section.settings.heading | strip_html | escape }}" style="--ib-pt:{{ section.settings.padding_top }}px;--ib-pb:{{ section.settings.padding_bottom }}px;--ib-min-height:{{ section.settings.min_height }}px;--ib-overlay-a:{{ section.settings.overlay_opacity_a | divided_by: 100.0 }};--ib-overlay-b:{{ section.settings.overlay_opacity_b | divided_by: 100.0 }};--ib-overlay-col:{{ section.settings.overlay_color }};--ib-text-color:{{ section.settings.text_color }};--ib-accent-color:{{ section.settings.accent_color }};--ib-focal:{{ img_pos }};">
+  <div class="ib__media" aria-hidden="true">
+    {%- if has_image -%}
+      {{- section.settings.image | image_url: width: 2800 | image_tag: loading: 'lazy', sizes: '100vw', widths: '375,600,900,1200,1600,2000,2400,2800', class: 'ib__img', alt: section.settings.image.alt | default: section.settings.heading | strip_html | escape -}}
+    {%- else -%}
+      <div class="ib__img-placeholder"></div>
+    {%- endif -%}
+    <div class="ib__overlay ib__overlay--base" aria-hidden="true"></div>
+    <div class="ib__overlay ib__overlay--vignette" aria-hidden="true"></div>
+    {%- if section.settings.overlay_style == 'split' -%}<div class="ib__overlay ib__overlay--split" aria-hidden="true"></div>{%- endif -%}
+    {%- if section.settings.overlay_style == 'gradient-up' -%}<div class="ib__overlay ib__overlay--grad-up" aria-hidden="true"></div>{%- endif -%}
+    {%- if section.settings.overlay_style == 'gradient-down' -%}<div class="ib__overlay ib__overlay--grad-down" aria-hidden="true"></div>{%- endif -%}
+  </div>
+  {%- if section.settings.bg_numeral != blank -%}<div class="ib__bg-numeral" aria-hidden="true">{{ section.settings.bg_numeral | escape }}</div>{%- endif -%}
+  <div class="ib__inner">
+    <div class="ib__content {{ txt_class }}">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="ib__eyebrow ib__reveal" style="--rd:0s;">{%- if section.settings.show_eyebrow_rule -%}<span class="ib__eyebrow-rule" aria-hidden="true"></span>{%- endif -%}{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <{{ section.settings.heading_tag }} class="ib__heading ib__reveal" style="--rd:0.12s;--ib-heading-size:{{ section.settings.heading_size }}px;">{{ section.settings.heading }}</{{ section.settings.heading_tag }}>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}<p class="ib__subheading ib__reveal" style="--rd:0.22s;">{{ section.settings.subheading | escape }}</p>{%- endif -%}
+      {%- if has_cta -%}
+        <div class="ib__cta ib__reveal" style="--rd:0.32s;">
+          {%- if section.settings.button_1_label != blank -%}
+            <a href="{{ section.settings.button_1_link | default: '#' }}" class="ib__btn ib__btn--{{ section.settings.button_1_style }}" {% if section.settings.button_1_link == blank %}aria-disabled="true"{% endif %}><span>{{ section.settings.button_1_label | escape }}</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="ib__btn-icon"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          {%- endif -%}
+          {%- if section.settings.button_2_label != blank -%}
+            <a href="{{ section.settings.button_2_link | default: '#' }}" class="ib__btn ib__btn--{{ section.settings.button_2_style }}" {% if section.settings.button_2_link == blank %}aria-disabled="true"{% endif %}><span>{{ section.settings.button_2_label | escape }}</span></a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- if section.settings.caption != blank -%}<p class="ib__caption ib__reveal" style="--rd:0.4s;">{{ section.settings.caption | escape }}</p>{%- endif -%}
+    </div>
+  </div>
+  {%- if section.settings.show_scroll_indicator -%}<div class="ib__scroll-indicator ib__reveal" style="--rd:0.55s;" aria-hidden="true"><div class="ib__scroll-line"></div></div>{%- endif -%}
+</section>
+<style>
+  #image-banner-{{ section.id }} { --ib-btn-primary-bg:var(--ib-text-color,#FFFFFF);--ib-btn-primary-text:#1C1410;--ib-btn-ghost-border:rgba(255,255,255,0.65);--ib-btn-ghost-text:var(--ib-text-color,#FFFFFF);--ib-btn-text-link:var(--ib-accent-color,#C9A87A); }
+  .ib { position:relative;width:100%;min-height:var(--ib-min-height,600px);display:flex;align-items:stretch;overflow:hidden;isolation:isolate;padding-top:var(--ib-pt,0px);padding-bottom:var(--ib-pb,0px); }
+  .ib__media { position:absolute;inset:0;z-index:0; }
+  .ib__img { display:block;width:100%;height:100%;object-fit:cover;object-position:var(--ib-focal,center); }
+  .ib__img-placeholder { position:absolute;inset:0;background:linear-gradient(145deg,#1a1008 0%,#2c1a0e 60%,#0d0906 100%); }
+  .ib__overlay--base { position:absolute;inset:0;background-color:var(--ib-overlay-col,#000);opacity:var(--ib-overlay-a,0.4);z-index:1; }
+  .ib__overlay--vignette { position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 35%,rgba(0,0,0,0.55) 100%);z-index:2;pointer-events:none; }
+  .ib__overlay--split { position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,var(--ib-overlay-b,0.5)) 0%,rgba(0,0,0,var(--ib-overlay-b,0.5)) 45%,transparent 75%);z-index:3; }
+  .ib__overlay--grad-up { position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,var(--ib-overlay-b,0.75)) 0%,rgba(0,0,0,0.15) 50%,transparent 100%);z-index:3; }
+  .ib__overlay--grad-down { position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,var(--ib-overlay-b,0.65)) 0%,rgba(0,0,0,0.1) 55%,transparent 100%);z-index:3; }
+  .ib__bg-numeral { position:absolute;z-index:4;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(20vw,30vw,40vw);font-weight:300;line-height:0.85;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,0.06);user-select:none;pointer-events:none;right:-2vw;bottom:-0.1em;letter-spacing:-0.04em; }
+  .ib__inner { position:relative;z-index:5;width:100%;display:flex;align-items:stretch; }
+  .ib__content { display:flex;flex-direction:column;justify-content:center;color:var(--ib-text-color,#FFFFFF);padding:clamp(4rem,10vw,8rem) clamp(1.5rem,6vw,6rem);gap:clamp(1rem,2.5vw,1.75rem);max-width:65ch; }
+  .ib__content--left { align-items:flex-start;text-align:left; }
+  .ib__content--right { align-items:flex-end;text-align:right;margin-left:auto; }
+  .ib__content--center { align-items:center;text-align:center;margin:0 auto;max-width:80ch; }
+  .ib__content--bottom-left { align-items:flex-start;text-align:left;justify-content:flex-end;padding-bottom:clamp(3rem,8vw,6rem); }
+  .ib__content--bottom-right { align-items:flex-end;text-align:right;justify-content:flex-end;margin-left:auto;padding-bottom:clamp(3rem,8vw,6rem); }
+  .ib__eyebrow { display:flex;align-items:center;gap:0.75rem;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(0.7rem,1vw,0.8rem);font-weight:400;letter-spacing:0.25em;text-transform:uppercase;opacity:0.8;margin:0; }
+  .ib__eyebrow-rule { display:block;width:2rem;height:1px;background-color:var(--ib-accent-color,#C9A87A);flex-shrink:0; }
+  .ib__heading { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(2.5rem,6vw,var(--ib-heading-size,72px));font-weight:300;line-height:1.05;letter-spacing:-0.025em;margin:0;text-shadow:0 2px 40px rgba(0,0,0,0.25); }
+  .ib__heading em { font-style:italic;font-weight:300; }
+  .ib__subheading { font-size:clamp(0.875rem,1.4vw,1.05rem);font-weight:300;line-height:1.75;opacity:0.85;max-width:44ch;margin:0; }
+  .ib__cta { display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-top:0.5rem; }
+  .ib__btn { display:inline-flex;align-items:center;gap:0.6rem;text-decoration:none;font-size:clamp(0.75rem,1vw,0.85rem);font-weight:500;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:background-color 0.3s ease,color 0.3s ease,border-color 0.3s ease,gap 0.3s cubic-bezier(0.22,1,0.36,1),opacity 0.3s ease; }
+  .ib__btn:focus-visible { outline:2px solid var(--ib-accent-color,#C9A87A);outline-offset:4px; }
+  .ib__btn--solid { background-color:var(--ib-btn-primary-bg);color:var(--ib-btn-primary-text);padding:0.9em 2em;border:1.5px solid transparent; }
+  .ib__btn--solid:hover { background-color:transparent;color:var(--ib-text-color,#ffffff);border-color:rgba(255,255,255,0.6);gap:0.9rem; }
+  .ib__btn--ghost { background-color:transparent;color:var(--ib-btn-ghost-text);border:1.5px solid var(--ib-btn-ghost-border);padding:0.9em 2em; }
+  .ib__btn--ghost:hover { background-color:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.9); }
+  .ib__btn--text { background-color:transparent;color:var(--ib-btn-text-link);border:none;padding:0.3em 0;border-bottom:1px solid var(--ib-btn-text-link); }
+  .ib__btn--text:hover { opacity:0.75;gap:0.9rem; }
+  .ib__btn-icon { flex-shrink:0;transition:transform 0.3s ease; }
+  .ib__btn--solid:hover .ib__btn-icon,.ib__btn--ghost:hover .ib__btn-icon,.ib__btn--text:hover .ib__btn-icon { transform:translateX(3px); }
+  .ib__caption { font-size:0.72rem;letter-spacing:0.1em;opacity:0.55;margin:0;font-style:italic; }
+  .ib__scroll-indicator { position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:6; }
+  .ib__scroll-line { width:1px;height:3.5rem;background:linear-gradient(to bottom,rgba(255,255,255,0.7),transparent);animation:ib-scroll-pulse 2.2s ease-in-out infinite;margin:0 auto; }
+  @keyframes ib-scroll-pulse { 0%,100%{opacity:0.7;transform:scaleY(1) translateY(0)} 50%{opacity:1;transform:scaleY(0.6) translateY(40%)} }
+  @media (prefers-reduced-motion:no-preference) {
+    .ib__reveal { opacity:0;transform:translateY(22px);transition:opacity 0.75s cubic-bezier(0.22,1,0.36,1) var(--rd,0s),transform 0.75s cubic-bezier(0.22,1,0.36,1) var(--rd,0s); }
+    .ib__reveal.is-visible { opacity:1;transform:translateY(0); }
+    .ib.in-view .ib__img { animation:ib-kenburns 18s ease-out forwards; }
+    @keyframes ib-kenburns { from{transform:scale(1)} to{transform:scale(1.06)} }
+  }
+  @media screen and (max-width:749px) { .ib__content--right,.ib__content--bottom-right { align-items:flex-start;text-align:left;margin-left:0; } .ib__content--center { text-align:left;align-items:flex-start; } .ib__bg-numeral { display:none; } .ib__overlay--split { background:linear-gradient(to top,rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.2) 60%,transparent 100%); } }
+</style>
+<script>
+(function(){
+  var section=document.getElementById('image-banner-{{ section.id }}');
+  if(!section)return;
+  var targets=section.querySelectorAll('.ib__reveal');
+  if('IntersectionObserver' in window){
+    var revealIO=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('is-visible');revealIO.unobserve(entry.target);}});},{threshold:0.1});
+    targets.forEach(function(el){revealIO.observe(el);});
+    var kbIO=new IntersectionObserver(function(entries){entries.forEach(function(entry){section.classList.toggle('in-view',entry.isIntersecting);});},{threshold:0.05});
+    kbIO.observe(section);
+  }else{targets.forEach(function(el){el.classList.add('is-visible');});}
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Image Banner",
+  "tag": "section",
+  "class": "section-image-banner",
+  "settings": [
+    { "type": "header", "content": "Image" },
+    { "type": "image_picker", "id": "image", "label": "Background image" },
+    { "type": "select", "id": "image_focal_point", "label": "Image focal point", "options": [{ "value": "top left", "label": "Top left" },{ "value": "top center", "label": "Top center" },{ "value": "top right", "label": "Top right" },{ "value": "center left", "label": "Middle left" },{ "value": "center", "label": "Middle center" },{ "value": "center right", "label": "Middle right" },{ "value": "bottom left", "label": "Bottom left" },{ "value": "bottom center", "label": "Bottom center" },{ "value": "bottom right", "label": "Bottom right" }], "default": "center" },
+    { "type": "header", "content": "Overlay" },
+    { "type": "color", "id": "overlay_color", "label": "Overlay colour", "default": "#000000" },
+    { "type": "range", "id": "overlay_opacity_a", "label": "Base overlay darkness", "min": 0, "max": 85, "step": 5, "unit": "%", "default": 35 },
+    { "type": "select", "id": "overlay_style", "label": "Directional overlay", "options": [{ "value": "none", "label": "None" },{ "value": "split", "label": "Split" },{ "value": "gradient-up", "label": "Gradient up" },{ "value": "gradient-down", "label": "Gradient down" }], "default": "gradient-up" },
+    { "type": "range", "id": "overlay_opacity_b", "label": "Directional overlay strength", "min": 0, "max": 95, "step": 5, "unit": "%", "default": 65 },
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow text" },
+    { "type": "checkbox", "id": "show_eyebrow_rule", "label": "Show decorative rule before eyebrow", "default": true },
+    { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p>Ready to find<br>your <em>perfect hearth?</em></p>" },
+    { "type": "select", "id": "heading_tag", "label": "Heading HTML tag", "options": [{ "value": "h1", "label": "H1" },{ "value": "h2", "label": "H2" },{ "value": "h3", "label": "H3" }], "default": "h2" },
+    { "type": "range", "id": "heading_size", "label": "Heading size (desktop)", "min": 32, "max": 120, "step": 2, "unit": "px", "default": 72 },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Browse our full collection and find the fireplace that belongs in your home." },
+    { "type": "text", "id": "caption", "label": "Caption / small print" },
+    { "type": "text", "id": "bg_numeral", "label": "Decorative background text" },
+    { "type": "header", "content": "Button 1" },
+    { "type": "text", "id": "button_1_label", "label": "Label", "default": "Shop the collection" },
+    { "type": "url", "id": "button_1_link", "label": "Link" },
+    { "type": "select", "id": "button_1_style", "label": "Style", "options": [{ "value": "solid", "label": "Solid" },{ "value": "ghost", "label": "Ghost" },{ "value": "text", "label": "Text link" }], "default": "solid" },
+    { "type": "header", "content": "Button 2" },
+    { "type": "text", "id": "button_2_label", "label": "Label", "default": "Book a consultation" },
+    { "type": "url", "id": "button_2_link", "label": "Link" },
+    { "type": "select", "id": "button_2_style", "label": "Style", "options": [{ "value": "solid", "label": "Solid" },{ "value": "ghost", "label": "Ghost" },{ "value": "text", "label": "Text link" }], "default": "ghost" },
+    { "type": "header", "content": "Layout" },
+    { "type": "select", "id": "text_position", "label": "Text position", "options": [{ "value": "left", "label": "Middle left" },{ "value": "center", "label": "Middle center" },{ "value": "right", "label": "Middle right" },{ "value": "bottom-left", "label": "Bottom left" },{ "value": "bottom-right", "label": "Bottom right" }], "default": "bottom-left" },
+    { "type": "range", "id": "min_height", "label": "Minimum section height", "min": 300, "max": 1000, "step": 25, "unit": "px", "default": 650 },
+    { "type": "checkbox", "id": "show_scroll_indicator", "label": "Show scroll line indicator", "default": false },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "text_color", "label": "Text colour", "default": "#FFFFFF" },
+    { "type": "color", "id": "accent_color", "label": "Accent / button colour", "default": "#C9A87A" },
+    { "type": "select", "id": "color_scheme", "label": "Section colour scheme", "options": [{ "value": "default", "label": "Default" },{ "value": "kenburns", "label": "Default + Ken-Burns zoom" }], "default": "kenburns" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 0 }
+  ],
+  "presets": [
+    {
+      "name": "Image Banner",
+      "settings": { "heading": "<p>Ready to find<br>your <em>perfect hearth?</em></p>", "heading_tag": "h2", "heading_size": 72, "subheading": "Browse our full collection.", "button_1_label": "Shop the collection", "button_1_style": "solid", "button_2_label": "Book a consultation", "button_2_style": "ghost", "overlay_color": "#000000", "overlay_opacity_a": 35, "overlay_style": "gradient-up", "overlay_opacity_b": 65, "text_position": "bottom-left", "min_height": 650, "text_color": "#FFFFFF", "accent_color": "#C9A87A", "color_scheme": "kenburns", "show_eyebrow_rule": true, "padding_top": 0, "padding_bottom": 0 }
+    }
+  ]
+}
+{% endschema %}

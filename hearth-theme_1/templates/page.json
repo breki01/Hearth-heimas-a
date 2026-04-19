@@ -1,0 +1,31 @@
+{
+  "sections": {
+    "page-main": {
+      "type": "page-main",
+      "settings": {
+        "show_page_title": true,
+        "title_alignment": "center",
+        "show_hero": false,
+        "hero_height": 420,
+        "hero_overlay": 45,
+        "layout": "centered",
+        "content_max_width": 76,
+        "show_breadcrumb": false,
+        "show_contact_form": false,
+        "contact_heading": "Get in touch",
+        "contact_subheading": "We'd love to hear from you. Fill in the form below and our team will be in touch within one working day.",
+        "contact_success": "Thank you — we'll be in touch shortly.",
+        "show_contact_details": true,
+        "contact_email": "",
+        "contact_phone": "",
+        "contact_address": "",
+        "show_faq": false,
+        "faq_heading": "Frequently asked questions",
+        "color_scheme": "light",
+        "padding_top": 80,
+        "padding_bottom": 100
+      }
+    }
+  },
+  "order": ["page-main"]
+}

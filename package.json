@@ -1,0 +1,25 @@
+{
+  "name": "hearth-heimas-a",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "theme-check": "node run-theme-check.js",
+    "validate": "node validate-schemas.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/breki01/Hearth-heimas-a.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/breki01/Hearth-heimas-a/issues"
+  },
+  "homepage": "https://github.com/breki01/Hearth-heimas-a#readme",
+  "devDependencies": {
+    "@shopify/theme-check-node": "^3.25.1"
+  }
+}

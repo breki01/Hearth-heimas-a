@@ -1,0 +1,43 @@
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "menu-shop": {
+          "type": "menu",
+          "settings": {
+            "heading": "Shop",
+            "menu": "footer"
+          }
+        },
+        "menu-company": {
+          "type": "menu",
+          "settings": {
+            "heading": "Company"
+          }
+        },
+        "menu-support": {
+          "type": "menu",
+          "settings": {
+            "heading": "Support"
+          }
+        }
+      },
+      "block_order": ["menu-shop", "menu-company", "menu-support"],
+      "settings": {
+        "tagline": "Handcrafted hearths and fireplaces, built to last a lifetime.",
+        "footer_logo_width": 160,
+        "show_newsletter": true,
+        "newsletter_heading": "Stay warm",
+        "newsletter_sub": "Inspiration, new arrivals, and exclusive offers.",
+        "footer_bg": "#17110C",
+        "footer_text": "#F5EFE8",
+        "footer_text_muted": "#A8947E",
+        "footer_border": "#2C1E14"
+      }
+    }
+  },
+  "order": ["footer"]
+}

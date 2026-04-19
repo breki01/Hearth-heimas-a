@@ -44,52 +44,9 @@
     ]
   },
   {
-    "name": "Header",
+    "name": "Brand",
     "settings": [
-      { "type": "header", "content": "Logo" },
-      { "type": "image_picker", "id": "logo", "label": "Logo image" },
-      { "type": "range", "id": "logo_width", "label": "Logo width", "min": 60, "max": 280, "step": 4, "unit": "px", "default": 140 },
-      { "type": "header", "content": "Navigation" },
-      { "type": "link_list", "id": "header_menu", "label": "Main navigation menu", "default": "main-menu" },
-      { "type": "header", "content": "Behaviour" },
-      { "type": "checkbox", "id": "header_sticky", "label": "Sticky header", "default": true },
-      { "type": "checkbox", "id": "header_transparent", "label": "Transparent header over hero", "default": true },
-      { "type": "header", "content": "Header colours" },
-      { "type": "color", "id": "header_bg", "label": "Header background", "default": "#FAF8F5" },
-      { "type": "color", "id": "header_text", "label": "Header text and icons", "default": "#1C1410" },
-      { "type": "color", "id": "header_text_transparent", "label": "Text colour when transparent", "default": "#FFFFFF" },
-      { "type": "range", "id": "header_height", "label": "Header height", "min": 52, "max": 100, "step": 2, "unit": "px", "default": 68 },
-      { "type": "header", "content": "Announcement bar" },
-      { "type": "checkbox", "id": "show_announcement", "label": "Show announcement bar", "default": false },
-      { "type": "text", "id": "announcement_text", "label": "Announcement text", "default": "Free nationwide installation on all orders." },
-      { "type": "url", "id": "announcement_link", "label": "Announcement link" },
-      { "type": "color", "id": "announcement_bg", "label": "Announcement background", "default": "#1C1410" },
-      { "type": "color", "id": "announcement_text_color", "label": "Announcement text colour", "default": "#FAF8F5" }
-    ]
-  },
-  {
-    "name": "Footer",
-    "settings": [
-      { "type": "header", "content": "Brand" },
-      { "type": "textarea", "id": "footer_tagline", "label": "Footer tagline", "default": "Handcrafted hearths and fireplaces, built to last a lifetime." },
-      { "type": "header", "content": "Navigation columns" },
-      { "type": "text", "id": "footer_menu_1_title", "label": "Column 1 heading", "default": "Shop" },
-      { "type": "link_list", "id": "footer_menu_1", "label": "Column 1 menu", "default": "footer" },
-      { "type": "text", "id": "footer_menu_2_title", "label": "Column 2 heading", "default": "Company" },
-      { "type": "link_list", "id": "footer_menu_2", "label": "Column 2 menu" },
-      { "type": "text", "id": "footer_menu_3_title", "label": "Column 3 heading", "default": "Support" },
-      { "type": "link_list", "id": "footer_menu_3", "label": "Column 3 menu" },
-      { "type": "header", "content": "Newsletter" },
-      { "type": "checkbox", "id": "footer_show_newsletter", "label": "Show newsletter sign-up", "default": true },
-      { "type": "text", "id": "footer_newsletter_heading", "label": "Newsletter heading", "default": "Stay warm" },
-      { "type": "text", "id": "footer_newsletter_sub", "label": "Newsletter subtext", "default": "Inspiration, new arrivals, and exclusive offers." },
-      { "type": "header", "content": "Footer colours" },
-      { "type": "color", "id": "footer_bg", "label": "Footer background", "default": "#17110C" },
-      { "type": "color", "id": "footer_text", "label": "Footer text", "default": "#F5EFE8" },
-      { "type": "color", "id": "footer_text_muted", "label": "Footer muted text", "default": "#A8947E" },
-      { "type": "color", "id": "footer_border", "label": "Footer border", "default": "#2C1E14" },
-      { "type": "header", "content": "Bottom bar" },
-      { "type": "richtext", "id": "footer_legal", "label": "Legal / copyright text" }
+      { "type": "image_picker", "id": "logo", "label": "Logo image", "info": "Used by the header and footer sections. Set the per-section width inside each section." }
     ]
   },
   {

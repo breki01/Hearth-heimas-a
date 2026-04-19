@@ -37,7 +37,17 @@
       <{{ section.settings.heading_tag }} class="rt__heading rt__reveal" style="--rd:0.12s;--rt-heading-size:{{ section.settings.heading_size }}px;">{{ section.settings.heading }}</{{ section.settings.heading_tag }}>
     {%- endif -%}
     {%- if section.settings.intro != blank -%}<div class="rt__intro rt__reveal" style="--rd:0.2s;">{{ section.settings.intro }}</div>{%- endif -%}
-    {%- if section.settings.show_mid_divider and (section.settings.intro != blank or section.settings.heading != blank) and (section.settings.body != blank or section.settings.pull_quote != blank) -%}
+    {%- liquid
+      assign has_heading_or_intro = false
+      if section.settings.intro != blank or section.settings.heading != blank
+        assign has_heading_or_intro = true
+      endif
+      assign has_body_or_quote = false
+      if section.settings.body != blank or section.settings.pull_quote != blank
+        assign has_body_or_quote = true
+      endif
+    -%}
+    {%- if section.settings.show_mid_divider and has_heading_or_intro and has_body_or_quote -%}
       <div class="rt__divider rt__reveal" style="--rd:0.25s;" aria-hidden="true"><span class="rt__div-line"></span><span class="rt__div-dot"></span><span class="rt__div-line"></span></div>
     {%- endif -%}
     {%- if section.settings.pull_quote != blank -%}

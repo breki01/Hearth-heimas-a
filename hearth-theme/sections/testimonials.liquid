@@ -1,0 +1,243 @@
+{%- comment -%}sections/testimonials.liquid — Hearth Theme{%- endcomment -%}
+{%- liquid
+  assign scheme = section.settings.color_scheme
+  assign block_count = section.blocks.size
+  assign layout = section.settings.layout
+-%}
+{%- if block_count > 0 -%}
+<section id="testimonials-{{ section.id }}" class="tst tst--{{ scheme }} tst--{{ layout }}" aria-label="Customer testimonials" style="--tst-pt:{{ section.settings.padding_top }}px;--tst-pb:{{ section.settings.padding_bottom }}px;--tst-cols:{{ section.settings.columns }};--tst-speed:{{ section.settings.autoplay_speed }}000ms;">
+  {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+    <header class="tst__header">
+      {%- if section.settings.eyebrow != blank -%}<p class="tst__eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="tst__heading">{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.subheading != blank -%}<p class="tst__subheading">{{ section.settings.subheading | escape }}</p>{%- endif -%}
+    </header>
+  {%- endif -%}
+  <div class="tst__carousel" data-autoplay="{{ section.settings.autoplay }}" data-speed="{{ section.settings.autoplay_speed }}" data-layout="{{ layout }}" role="region" aria-roledescription="carousel" aria-label="Testimonials">
+    <div class="tst__track-wrap">
+      <div class="tst__track" aria-live="polite" aria-atomic="false">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign rating = block.settings.rating
+            assign has_image = false
+            if block.settings.author_image != blank
+              assign has_image = true
+            endif
+          -%}
+          <article class="tst__slide" role="group" aria-roledescription="slide" aria-label="Testimonial {{ forloop.index }} of {{ block_count }}" aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+            <div class="tst__card">
+              {%- if section.settings.show_quote_mark -%}
+                <div class="tst__quote-mark" aria-hidden="true"><svg width="36" height="28" viewBox="0 0 36 28" fill="none"><path d="M0 28V17.6C0 11.6 1.6 7.2 4.8 4.4C8 1.46667 12.5333 0 18.4 0V4.8C15.4667 4.8 13.2 5.6 11.6 7.2C10.1333 8.8 9.4 11.2 9.4 14.4H16.8V28H0ZM19.2 28V17.6C19.2 11.6 20.8 7.2 24 4.4C27.2 1.46667 31.7333 0 37.6 0V4.8C34.6667 4.8 32.4 5.6 30.8 7.2C29.3333 8.8 28.6 11.2 28.6 14.4H36V28H19.2Z" fill="currentColor"/></svg></div>
+              {%- endif -%}
+              {%- if section.settings.show_stars and rating > 0 -%}
+                <div class="tst__stars" aria-label="{{ rating }} out of 5 stars" role="img">
+                  {%- for i in (1..5) -%}
+                    <svg class="tst__star{% if i <= rating %} tst__star--filled{% endif %}" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1L8.85 4.8L13 5.4L10 8.3L10.7 12.5L7 10.5L3.3 12.5L4 8.3L1 5.4L5.15 4.8L7 1Z" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" {%- if i <= rating %} fill="currentColor"{% endif %}/></svg>
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+              {%- if block.settings.quote != blank -%}<blockquote class="tst__quote"><p>{{ block.settings.quote | escape }}</p></blockquote>{%- endif -%}
+              <footer class="tst__author">
+                {%- if has_image -%}
+                  <div class="tst__author-img-wrap">{{- block.settings.author_image | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60,80,120', sizes: '60px', class: 'tst__author-img', alt: block.settings.author_name | escape -}}</div>
+                {%- elsif block.settings.author_name != blank -%}
+                  <div class="tst__author-initial" aria-hidden="true">{{ block.settings.author_name | slice: 0 | upcase }}</div>
+                {%- endif -%}
+                <div class="tst__author-meta">
+                  {%- if block.settings.author_name != blank -%}<cite class="tst__author-name">{{ block.settings.author_name | escape }}</cite>{%- endif -%}
+                  {%- if block.settings.author_location != blank -%}<span class="tst__author-location">{{ block.settings.author_location | escape }}</span>{%- endif -%}
+                </div>
+              </footer>
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+    </div>
+    {%- if block_count > 1 -%}
+      {%- if section.settings.show_arrows -%}
+        <button class="tst__arrow tst__arrow--prev" aria-label="Previous testimonial" type="button"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M12.5 5L7.5 10L12.5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="tst__arrow tst__arrow--next" aria-label="Next testimonial" type="button"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      {%- endif -%}
+      {%- if section.settings.show_dots -%}
+        <div class="tst__dots" role="tablist" aria-label="Select testimonial">
+          {%- for block in section.blocks -%}
+            <button class="tst__dot{% if forloop.first %} tst__dot--active{% endif %}" role="tab" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="Go to testimonial {{ forloop.index }}" data-index="{{ forloop.index0 }}" type="button"></button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+      {%- if section.settings.autoplay and section.settings.show_pause_button -%}
+        <button class="tst__pause" aria-label="Pause auto-play" aria-pressed="false" type="button">
+          <svg class="tst__pause-icon tst__pause-icon--pause" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="4" y="3" width="3" height="10" rx="1" fill="currentColor"/><rect x="9" y="3" width="3" height="10" rx="1" fill="currentColor"/></svg>
+          <svg class="tst__pause-icon tst__pause-icon--play" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 3L13 8L5 13V3Z" fill="currentColor"/></svg>
+        </button>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+{%- endif -%}
+<style>
+  #testimonials-{{ section.id }} { --tst-bg:{% if scheme == 'dark' %}#17110C{% elsif scheme == 'warm' %}#F2EDE6{% else %}#FAF8F5{% endif %};--tst-text:{% if scheme == 'dark' %}#F5EFE8{% else %}#1C1410{% endif %};--tst-text-muted:{% if scheme == 'dark' %}#A8947E{% else %}#6B5B4E{% endif %};--tst-accent:{% if scheme == 'dark' %}#C9A87A{% else %}#8C6A48{% endif %};--tst-star-empty:{% if scheme == 'dark' %}#3D2D20{% else %}#D4C5B5{% endif %};--tst-card-bg:{% if scheme == 'dark' %}#1F1610{% elsif scheme == 'warm' %}#FAF8F5{% else %}#FFFFFF{% endif %};--tst-card-border:{% if scheme == 'dark' %}#2C1E14{% elsif scheme == 'warm' %}#D4C5B5{% else %}#E4DAD0{% endif %};--tst-card-shadow:{% if scheme == 'dark' %}0 2px 32px rgba(0,0,0,0.35){% else %}0 2px 32px rgba(28,20,16,0.07){% endif %};--tst-arrow-bg:{% if scheme == 'dark' %}#2C1E14{% else %}#FFFFFF{% endif %};--tst-arrow-border:{% if scheme == 'dark' %}#3D2D20{% else %}#E4DAD0{% endif %};--tst-dot-bg:{% if scheme == 'dark' %}#3D2D20{% else %}#D4C5B5{% endif %};--tst-dot-active:{% if scheme == 'dark' %}#C9A87A{% else %}#1C1410{% endif %}; }
+  .tst { background-color:var(--tst-bg);color:var(--tst-text);padding:var(--tst-pt,5rem) clamp(1.25rem,5vw,5rem) var(--tst-pb,5rem);overflow:hidden; }
+  .tst__header { text-align:center;margin-bottom:clamp(2.5rem,5vw,4rem);display:flex;flex-direction:column;align-items:center;gap:0.7rem; }
+  .tst__eyebrow { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(0.7rem,1vw,0.8rem);font-weight:400;letter-spacing:0.25em;text-transform:uppercase;color:var(--tst-accent);margin:0; }
+  .tst__heading { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:300;line-height:1.1;letter-spacing:-0.015em;margin:0; }
+  .tst__heading em { font-style:italic; }
+  .tst__subheading { font-size:clamp(0.85rem,1.2vw,0.95rem);font-weight:300;color:var(--tst-text-muted);max-width:48ch;margin:0; }
+  .tst__carousel { position:relative;max-width:100%; }
+  .tst__track-wrap { overflow:hidden; }
+  .tst--single .tst__track { display:flex;transition:transform 0.6s cubic-bezier(0.22,1,0.36,1); }
+  .tst--single .tst__slide { flex:0 0 100%;width:100%;padding:0 clamp(0px,8vw,6rem); }
+  .tst--grid .tst__track { display:grid;grid-template-columns:repeat(var(--tst-cols,3),1fr);gap:clamp(1rem,2.5vw,1.75rem); }
+  .tst--grid .tst__slide { opacity:0;transform:translateY(24px);transition:opacity 0.65s cubic-bezier(0.22,1,0.36,1) var(--reveal-delay,0s),transform 0.65s cubic-bezier(0.22,1,0.36,1) var(--reveal-delay,0s); }
+  .tst--grid .tst__slide.is-visible { opacity:1;transform:translateY(0); }
+  @media (prefers-reduced-motion:reduce) { .tst--single .tst__track{transition:none} .tst--grid .tst__slide{transition:none;opacity:1;transform:none} }
+  .tst__card { background-color:var(--tst-card-bg);border:1px solid var(--tst-card-border);box-shadow:var(--tst-card-shadow);padding:clamp(1.75rem,4vw,2.75rem);display:flex;flex-direction:column;gap:clamp(1rem,2vw,1.5rem);height:100%; }
+  .tst__quote-mark { color:var(--tst-card-border);line-height:1;flex-shrink:0; }
+  .tst__stars { display:flex;gap:0.2rem;flex-shrink:0; }
+  .tst__star { color:var(--tst-star-empty); }
+  .tst__star--filled { color:var(--tst-accent); }
+  .tst__quote { margin:0;flex:1; }
+  .tst__quote p { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(1.05rem,2vw,1.3rem);font-weight:300;font-style:italic;line-height:1.65;color:var(--tst-text);margin:0; }
+  .tst--single .tst__quote p { font-size:clamp(1.2rem,2.5vw,1.75rem);text-align:center; }
+  .tst__author { display:flex;align-items:center;gap:0.85rem;margin-top:auto;border-top:1px solid var(--tst-card-border);padding-top:clamp(0.9rem,1.5vw,1.25rem); }
+  .tst--single .tst__author { justify-content:center;border-top:none;padding-top:0; }
+  .tst__author-img-wrap { flex-shrink:0;width:44px;height:44px;border-radius:50%;overflow:hidden;border:2px solid var(--tst-card-border); }
+  .tst__author-img { display:block;width:100%;height:100%;object-fit:cover; }
+  .tst__author-initial { flex-shrink:0;width:44px;height:44px;border-radius:50%;background-color:var(--tst-card-border);color:var(--tst-text-muted);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',Georgia,serif;font-size:1.1rem;font-weight:400; }
+  .tst__author-meta { display:flex;flex-direction:column;gap:0.2rem; }
+  .tst__author-name { font-style:normal;font-size:clamp(0.8rem,1.1vw,0.875rem);font-weight:500;color:var(--tst-text);letter-spacing:0.02em; }
+  .tst__author-location { font-size:0.75rem;color:var(--tst-text-muted);letter-spacing:0.04em; }
+  .tst__arrow { position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:44px;height:44px;border-radius:50%;background-color:var(--tst-arrow-bg);border:1px solid var(--tst-arrow-border);color:var(--tst-text);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background-color 0.25s ease,color 0.25s ease,transform 0.25s ease;box-shadow:0 2px 12px rgba(0,0,0,0.1); }
+  .tst__arrow--prev { left:clamp(-1.5rem,-3vw,-1.25rem); }
+  .tst__arrow--next { right:clamp(-1.5rem,-3vw,-1.25rem); }
+  .tst__arrow:hover { background-color:var(--tst-accent);color:#fff;border-color:transparent;transform:translateY(-50%) scale(1.08); }
+  .tst__arrow:disabled { opacity:0.3;pointer-events:none; }
+  .tst__arrow:focus-visible { outline:2px solid var(--tst-accent);outline-offset:3px; }
+  .tst--grid .tst__arrow { display:none; }
+  .tst__dots { display:flex;justify-content:center;gap:0.5rem;margin-top:clamp(1.5rem,3vw,2.5rem); }
+  .tst--grid .tst__dots { display:none; }
+  .tst__dot { width:6px;height:6px;border-radius:50%;background-color:var(--tst-dot-bg);border:none;cursor:pointer;padding:0;transition:background-color 0.3s ease,transform 0.3s ease,width 0.3s ease; }
+  .tst__dot--active { background-color:var(--tst-dot-active);width:22px;border-radius:3px; }
+  .tst__dot:focus-visible { outline:2px solid var(--tst-accent);outline-offset:3px; }
+  .tst__pause { position:absolute;bottom:-0.25rem;right:0;width:28px;height:28px;border:1px solid var(--tst-card-border);background:var(--tst-card-bg);color:var(--tst-text-muted);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;transition:color 0.2s ease,border-color 0.2s ease; }
+  .tst__pause:hover { color:var(--tst-accent);border-color:var(--tst-accent); }
+  .tst__pause-icon--play { display:none; }
+  .tst__pause-icon--pause { display:block; }
+  .tst__pause[aria-pressed="true"] .tst__pause-icon--pause { display:none; }
+  .tst__pause[aria-pressed="true"] .tst__pause-icon--play { display:block; }
+  .tst--grid .tst__pause { display:none; }
+  @media screen and (max-width:1099px) { .tst--grid .tst__track { grid-template-columns:repeat({{ section.settings.columns | minus: 1 | at_least: 1 }},1fr); } }
+  @media screen and (max-width:749px) { .tst--single .tst__slide{padding:0} .tst--grid .tst__track{grid-template-columns:1fr} .tst__arrow--prev{left:0} .tst__arrow--next{right:0} .tst--single .tst__quote p{text-align:left} .tst--single .tst__author{justify-content:flex-start} }
+</style>
+<script>
+(function(){
+  var section=document.getElementById('testimonials-{{ section.id }}');
+  if(!section)return;
+  var layout=section.querySelector('.tst__carousel').dataset.layout;
+  var carousel=section.querySelector('.tst__carousel');
+  if(!carousel)return;
+  if(layout==='grid'){
+    var slides=section.querySelectorAll('.tst__slide');
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('is-visible');io.unobserve(entry.target);}});},{threshold:0.1});
+      slides.forEach(function(slide,i){slide.style.setProperty('--reveal-delay',(i*0.1)+'s');io.observe(slide);});
+    }else{slides.forEach(function(el){el.classList.add('is-visible');});}
+    return;
+  }
+  var track=section.querySelector('.tst__track');
+  var slides=Array.from(section.querySelectorAll('.tst__slide'));
+  var dots=Array.from(section.querySelectorAll('.tst__dot'));
+  var btnPrev=section.querySelector('.tst__arrow--prev');
+  var btnNext=section.querySelector('.tst__arrow--next');
+  var btnPause=section.querySelector('.tst__pause');
+  var total=slides.length;
+  var current=0;
+  var paused=false;
+  var timer=null;
+  var autoplay=carousel.dataset.autoplay==='true';
+  var speed=parseInt(carousel.dataset.speed,10)*1000||5000;
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){autoplay=false;}
+  function goTo(index){
+    index=((index%total)+total)%total;
+    track.style.transform='translateX(-'+(index*100)+'%)';
+    slides.forEach(function(slide,i){slide.setAttribute('aria-hidden',i!==index?'true':'false');});
+    dots.forEach(function(dot,i){dot.classList.toggle('tst__dot--active',i===index);dot.setAttribute('aria-selected',i===index?'true':'false');});
+    current=index;
+  }
+  function next(){goTo(current+1);}
+  function prev(){goTo(current-1);}
+  function startTimer(){if(!autoplay||paused)return;clearInterval(timer);timer=setInterval(next,speed);}
+  function stopTimer(){clearInterval(timer);}
+  function setPaused(val){paused=val;if(btnPause)btnPause.setAttribute('aria-pressed',val?'true':'false');if(val){stopTimer();}else{startTimer();}}
+  if(btnPrev)btnPrev.addEventListener('click',function(){stopTimer();prev();startTimer();});
+  if(btnNext)btnNext.addEventListener('click',function(){stopTimer();next();startTimer();});
+  dots.forEach(function(dot){dot.addEventListener('click',function(){stopTimer();goTo(parseInt(dot.dataset.index,10));startTimer();});});
+  if(btnPause)btnPause.addEventListener('click',function(){setPaused(!paused);});
+  section.addEventListener('keydown',function(e){if(e.key==='ArrowLeft'){stopTimer();prev();startTimer();}if(e.key==='ArrowRight'){stopTimer();next();startTimer();}if(e.key===' '){e.preventDefault();setPaused(!paused);}});
+  var touchStartX=0;
+  section.addEventListener('touchstart',function(e){touchStartX=e.touches[0].clientX;stopTimer();},{passive:true});
+  section.addEventListener('touchend',function(e){var delta=e.changedTouches[0].clientX-touchStartX;if(Math.abs(delta)>40){delta<0?next():prev();}startTimer();},{passive:true});
+  section.addEventListener('mouseenter',stopTimer);
+  section.addEventListener('mouseleave',startTimer);
+  section.addEventListener('focusin',stopTimer);
+  section.addEventListener('focusout',startTimer);
+  goTo(0);
+  startTimer();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "tag": "section",
+  "class": "section-testimonials",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "header", "content": "Section heading" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow text", "default": "What our customers say" },
+    { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p>Stories of<br><em>warmth</em></p>" },
+    { "type": "text", "id": "subheading", "label": "Subheading" },
+    { "type": "header", "content": "Layout" },
+    { "type": "select", "id": "layout", "label": "Layout", "options": [{ "value": "single", "label": "Carousel — one at a time" },{ "value": "grid", "label": "Grid — side by side" }], "default": "single" },
+    { "type": "range", "id": "columns", "label": "Columns (grid layout, desktop)", "min": 2, "max": 4, "step": 1, "default": 3 },
+    { "type": "header", "content": "Card options" },
+    { "type": "checkbox", "id": "show_stars", "label": "Show star rating", "default": true },
+    { "type": "checkbox", "id": "show_quote_mark", "label": "Show decorative quote mark", "default": true },
+    { "type": "header", "content": "Carousel controls" },
+    { "type": "checkbox", "id": "show_arrows", "label": "Show prev / next arrows", "default": true },
+    { "type": "checkbox", "id": "show_dots", "label": "Show dot pagination", "default": true },
+    { "type": "checkbox", "id": "autoplay", "label": "Auto-play carousel", "default": true },
+    { "type": "range", "id": "autoplay_speed", "label": "Auto-play interval", "min": 3, "max": 10, "step": 1, "unit": "s", "default": 5 },
+    { "type": "checkbox", "id": "show_pause_button", "label": "Show pause / play button", "default": true },
+    { "type": "header", "content": "Style" },
+    { "type": "select", "id": "color_scheme", "label": "Colour scheme", "options": [{ "value": "light", "label": "Light" },{ "value": "dark", "label": "Dark" },{ "value": "warm", "label": "Warm" }], "default": "light" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        { "type": "textarea", "id": "quote", "label": "Quote", "default": "The most beautiful fireplace I have ever owned." },
+        { "type": "range", "id": "rating", "label": "Star rating", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "text", "id": "author_name", "label": "Author name", "default": "Margaret H." },
+        { "type": "text", "id": "author_location", "label": "Location or product", "default": "Yorkshire, UK" },
+        { "type": "image_picker", "id": "author_image", "label": "Author photo" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "settings": { "eyebrow": "What our customers say", "heading": "<p>Stories of<br><em>warmth</em></p>", "layout": "single", "columns": 3, "show_stars": true, "show_quote_mark": true, "show_arrows": true, "show_dots": true, "autoplay": true, "autoplay_speed": 5, "show_pause_button": true, "color_scheme": "light", "padding_top": 80, "padding_bottom": 80 },
+      "blocks": [
+        { "type": "testimonial", "settings": { "quote": "The most beautiful fireplace I have ever owned. It heats the entire room effortlessly.", "rating": 5, "author_name": "Margaret H.", "author_location": "Yorkshire, UK" } },
+        { "type": "testimonial", "settings": { "quote": "Exceptional craftsmanship and a team that genuinely cares. From consultation to installation, faultless.", "rating": 5, "author_name": "James & Clare T.", "author_location": "Edinburgh, UK" } },
+        { "type": "testimonial", "settings": { "quote": "Three years on and it still looks brand new. The quality is in another league.", "rating": 5, "author_name": "Priya S.", "author_location": "London, UK" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

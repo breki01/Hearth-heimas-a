@@ -3,7 +3,10 @@
   assign current_variant = product.selected_or_first_available_variant
   assign product_form_id = 'product-form-' | append: section.id
   assign scheme = section.settings.color_scheme
-  assign has_images = product.images.size > 0
+  assign has_images = false
+  if product.images.size > 0
+    assign has_images = true
+  endif
 -%}
 
 <div id="product-main-{{ section.id }}" class="pm pm--{{ scheme }}" data-section-id="{{ section.id }}">

@@ -3,7 +3,9 @@
     "name": "theme_info",
     "theme_name": "Hearth",
     "theme_version": "1.0.0",
-    "theme_author": "Hearth Theme"
+    "theme_author": "Hearth Theme",
+    "theme_documentation_url": "https://github.com/breki01/Hearth-heimas-a#readme",
+    "theme_support_url": "https://github.com/breki01/Hearth-heimas-a/issues"
   },
   {
     "name": "Colours",
@@ -31,13 +33,13 @@
       { "type": "range", "id": "type_base_size", "label": "Base font size", "min": 14, "max": 18, "step": 1, "unit": "px", "default": 16 },
       { "type": "select", "id": "type_heading_scale", "label": "Heading scale", "options": [{ "value": "small", "label": "Compact" }, { "value": "medium", "label": "Default" }, { "value": "large", "label": "Grand" }], "default": "medium" },
       { "type": "header", "content": "Letter spacing" },
-      { "type": "range", "id": "type_nav_spacing", "label": "Navigation letter spacing", "min": 0, "max": 25, "step": 1, "unit": "/100 em", "default": 10 }
+      { "type": "range", "id": "type_nav_spacing", "label": "Navigation letter spacing (÷100 em)", "min": 0, "max": 25, "step": 1, "default": 10 }
     ]
   },
   {
     "name": "Layout",
     "settings": [
-      { "type": "range", "id": "layout_page_width", "label": "Maximum page width", "min": 1100, "max": 1800, "step": 50, "unit": "px", "default": 1440 },
+      { "type": "range", "id": "layout_page_width", "label": "Maximum page width", "min": 1100, "max": 1800, "step": 50, "unit": "px", "default": 1450 },
       { "type": "range", "id": "layout_section_spacing", "label": "Vertical spacing between sections", "min": 0, "max": 60, "step": 4, "unit": "px", "default": 0 }
     ]
   },

@@ -102,7 +102,13 @@
             {%- endform -%}
           </div>
 
-          {%- if section.settings.show_contact_details and (section.settings.contact_email != blank or section.settings.contact_phone != blank or section.settings.contact_address != blank) -%}
+          {%- liquid
+            assign has_contact_detail = false
+            if section.settings.contact_email != blank or section.settings.contact_phone != blank or section.settings.contact_address != blank
+              assign has_contact_detail = true
+            endif
+          -%}
+          {%- if section.settings.show_contact_details and has_contact_detail -%}
             <div class="pgm__contact-details">
               {%- if section.settings.contact_email != blank -%}
                 <div class="pgm__contact-detail"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="3.5" width="12" height="9" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M2 6L8 9.5L14 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><a href="mailto:{{ section.settings.contact_email | escape }}">{{ section.settings.contact_email | escape }}</a></div>

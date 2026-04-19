@@ -72,7 +72,7 @@
         "mq-6": {
           "type": "item",
           "settings": {
-            "text": "Bespoke Designs Available",
+            "text": "",
             "icon": "award"
           }
         }
@@ -87,7 +87,7 @@
       ],
       "settings": {
         "strip_label": "Why Hearth",
-        "scroll_speed": 35,
+        "scroll_speed": 90,
         "scroll_direction": "left",
         "separator_style": "flame",
         "font_size": 13,

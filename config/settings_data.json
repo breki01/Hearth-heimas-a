@@ -9,8 +9,10 @@
  */
 {
   "current": {
+    "logo": "shopify://shop_images/Copy_of_Hearth_Colour_With_Tagline.png",
     "logo_width": 140,
     "header_sticky": true,
+    "header_bg": "#FAF8F5",
     "header_text": "#1C1410",
     "content_for_index": []
   }

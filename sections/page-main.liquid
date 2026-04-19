@@ -1,0 +1,311 @@
+{%- comment -%}sections/page-main.liquid — Hearth Theme{%- endcomment -%}
+{%- liquid
+  assign scheme = section.settings.color_scheme
+  assign layout = section.settings.layout
+  assign show_contact = section.settings.show_contact_form
+  assign show_faq = section.settings.show_faq
+  assign faq_blocks = section.blocks | where: 'type', 'faq_item'
+  assign sidebar_blocks = section.blocks | where: 'type', 'sidebar_item'
+  assign has_sidebar = false
+  if layout == 'sidebar' and sidebar_blocks.size > 0
+    assign has_sidebar = true
+  endif
+-%}
+
+<div id="page-main-{{ section.id }}" class="pgm pgm--{{ scheme }} pgm--{{ layout }}" style="--pgm-pt:{{ section.settings.padding_top }}px;--pgm-pb:{{ section.settings.padding_bottom }}px;--pgm-max:{{ section.settings.content_max_width }}ch;">
+
+  {%- if section.settings.show_hero and section.settings.hero_image != blank -%}
+    <div class="pgm__hero" style="--pgm-hero-h:{{ section.settings.hero_height }}px;--pgm-hero-ov:{{ section.settings.hero_overlay | divided_by: 100.0 }};">
+      {{- section.settings.hero_image | image_url: width: 2400 | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '100vw', widths: '750,1100,1600,2000,2400', class: 'pgm__hero-img', alt: page.title | escape -}}
+      <div class="pgm__hero-overlay" aria-hidden="true"></div>
+      <div class="pgm__hero-content">
+        <h1 class="pgm__hero-title">{{ page.title | escape }}</h1>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div class="pgm__inner">
+
+    {%- if section.settings.show_breadcrumb -%}
+      <nav class="pgm__breadcrumb" aria-label="Breadcrumb">
+        <ol class="pgm__breadcrumb-list" role="list">
+          <li><a href="{{ routes.root_url }}">Home</a></li>
+          <li aria-current="page">{{ page.title | escape }}</li>
+        </ol>
+      </nav>
+    {%- endif -%}
+
+    {%- if section.settings.show_page_title and section.settings.show_hero == false -%}
+      <header class="pgm__page-header">
+        <h1 class="pgm__page-title">{{ page.title | escape }}</h1>
+      </header>
+    {%- endif -%}
+
+    <div class="pgm__grid{% if has_sidebar %} pgm__grid--has-sidebar{% endif %}">
+
+      <div class="pgm__content">
+        {%- if page.content != blank -%}
+          <div class="pgm__rte">{{ page.content }}</div>
+        {%- endif -%}
+
+        {%- if show_contact -%}
+          <div class="pgm__contact">
+            {%- if section.settings.contact_heading != blank -%}<h2 class="pgm__contact-heading">{{ section.settings.contact_heading | escape }}</h2>{%- endif -%}
+            {%- if section.settings.contact_subheading != blank -%}<p class="pgm__contact-sub">{{ section.settings.contact_subheading | escape }}</p>{%- endif -%}
+            {%- form 'contact', class: 'pgm__contact-form', id: 'contact-form-{{ section.id }}' -%}
+              {%- if form.posted_successfully? -%}
+                <div class="pgm__form-success" role="alert" aria-live="assertive">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 10L9 12.5L13.5 7.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  {{ section.settings.contact_success | default: 'Thank you — we will be in touch shortly.' | escape }}
+                </div>
+              {%- else -%}
+                {%- if form.errors -%}
+                  <div class="pgm__form-error" role="alert" aria-live="assertive">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.25" stroke="currentColor" stroke-width="1.2"/><path d="M8 5V8.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="11" r="0.75" fill="currentColor"/></svg>
+                    {{ form.errors | default_errors }}
+                  </div>
+                {%- endif -%}
+                <div class="pgm__form-row">
+                  <div class="pgm__field">
+                    <label for="contact-name-{{ section.id }}" class="pgm__label">Name <span aria-hidden="true">*</span></label>
+                    <input type="text" id="contact-name-{{ section.id }}" name="contact[name]" class="pgm__input{% if form.errors contains 'name' %} pgm__input--error{% endif %}" autocomplete="name" required aria-required="true" value="{{ form.name }}">
+                  </div>
+                  <div class="pgm__field">
+                    <label for="contact-email-{{ section.id }}" class="pgm__label">Email <span aria-hidden="true">*</span></label>
+                    <input type="email" id="contact-email-{{ section.id }}" name="contact[email]" class="pgm__input{% if form.errors contains 'email' %} pgm__input--error{% endif %}" autocomplete="email" required aria-required="true" value="{{ form.email }}">
+                  </div>
+                </div>
+                <div class="pgm__form-row">
+                  <div class="pgm__field">
+                    <label for="contact-phone-{{ section.id }}" class="pgm__label">Phone</label>
+                    <input type="tel" id="contact-phone-{{ section.id }}" name="contact[phone]" class="pgm__input" autocomplete="tel" value="{{ form.phone }}">
+                  </div>
+                  <div class="pgm__field">
+                    <label for="contact-subject-{{ section.id }}" class="pgm__label">Subject</label>
+                    <select id="contact-subject-{{ section.id }}" name="contact[subject]" class="pgm__input pgm__input--select">
+                      <option value="">Please select…</option>
+                      <option value="General enquiry">General enquiry</option>
+                      <option value="Product enquiry">Product enquiry</option>
+                      <option value="Installation">Installation</option>
+                      <option value="Warranty">Warranty</option>
+                      <option value="Order">Order</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="pgm__field">
+                  <label for="contact-message-{{ section.id }}" class="pgm__label">Message <span aria-hidden="true">*</span></label>
+                  <textarea id="contact-message-{{ section.id }}" name="contact[body]" class="pgm__input pgm__textarea{% if form.errors contains 'body' %} pgm__input--error{% endif %}" rows="5" required aria-required="true">{{ form.body }}</textarea>
+                </div>
+                <button type="submit" class="pgm__submit">Send message</button>
+              {%- endif -%}
+            {%- endform -%}
+          </div>
+
+          {%- if section.settings.show_contact_details and (section.settings.contact_email != blank or section.settings.contact_phone != blank or section.settings.contact_address != blank) -%}
+            <div class="pgm__contact-details">
+              {%- if section.settings.contact_email != blank -%}
+                <div class="pgm__contact-detail"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="3.5" width="12" height="9" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M2 6L8 9.5L14 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><a href="mailto:{{ section.settings.contact_email | escape }}">{{ section.settings.contact_email | escape }}</a></div>
+              {%- endif -%}
+              {%- if section.settings.contact_phone != blank -%}
+                <div class="pgm__contact-detail"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 2H6L7.5 5.5L5.5 7C6.5 8.5 7.5 9.5 9 10.5L10.5 8.5L14 10V12.5C14 13.3 13.3 14 12.5 14C7.5 14 2 8.5 2 3.5C2 2.7 2.7 2 3.5 2Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg><a href="tel:{{ section.settings.contact_phone | replace: ' ', '' | escape }}">{{ section.settings.contact_phone | escape }}</a></div>
+              {%- endif -%}
+              {%- if section.settings.contact_address != blank -%}
+                <div class="pgm__contact-detail"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5C5.52 1.5 3.5 3.52 3.5 6C3.5 9.5 8 14.5 8 14.5C8 14.5 12.5 9.5 12.5 6C12.5 3.52 10.48 1.5 8 1.5Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="8" cy="6" r="1.75" stroke="currentColor" stroke-width="1.2"/></svg><span>{{ section.settings.contact_address | escape }}</span></div>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+
+        {%- if show_faq and faq_blocks.size > 0 -%}
+          <div class="pgm__faq">
+            {%- if section.settings.faq_heading != blank -%}<h2 class="pgm__faq-heading">{{ section.settings.faq_heading | escape }}</h2>{%- endif -%}
+            {%- for block in faq_blocks -%}
+              {%- if block.settings.question != blank and block.settings.answer != blank -%}
+                <details class="pgm__faq-item" {{ block.shopify_attributes }}>
+                  <summary class="pgm__faq-question">
+                    <span>{{ block.settings.question | escape }}</span>
+                    <span class="pgm__faq-icon" aria-hidden="true">
+                      <svg class="pgm__faq-plus" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1V13M1 7H13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                      <svg class="pgm__faq-minus" width="14" height="2" viewBox="0 0 14 2" fill="none"><path d="M1 1H13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                    </span>
+                  </summary>
+                  <div class="pgm__faq-body"><div class="pgm__faq-answer">{{ block.settings.answer }}</div></div>
+                </details>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- if has_sidebar -%}
+        <aside class="pgm__sidebar" aria-label="Additional information">
+          {%- for block in sidebar_blocks -%}
+            <div class="pgm__sidebar-block" {{ block.shopify_attributes }}>
+              {%- if block.settings.title != blank -%}<h3 class="pgm__sidebar-title">{{ block.settings.title | escape }}</h3>{%- endif -%}
+              {%- if block.settings.content != blank -%}<div class="pgm__sidebar-content">{{ block.settings.content }}</div>{%- endif -%}
+              {%- if block.settings.button_label != blank -%}
+                <a href="{{ block.settings.button_link | default: '#' }}" class="pgm__sidebar-btn">{{ block.settings.button_label | escape }}</a>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </aside>
+      {%- endif -%}
+
+    </div>
+  </div>
+</div>
+
+<style>
+  #page-main-{{ section.id }}{--pgm-bg:{% if scheme == 'dark' %}#17110C{% else %}#FAF8F5{% endif %};--pgm-text:{% if scheme == 'dark' %}#F5EFE8{% else %}#1C1410{% endif %};--pgm-muted:{% if scheme == 'dark' %}#A8947E{% else %}#6B5B4E{% endif %};--pgm-accent:{% if scheme == 'dark' %}#C9A87A{% else %}#8C6A48{% endif %};--pgm-border:{% if scheme == 'dark' %}#2C1E14{% else %}#E4DAD0{% endif %};--pgm-input-bg:{% if scheme == 'dark' %}#1F1610{% else %}#FFFFFF{% endif %};--pgm-submit-bg:{% if scheme == 'dark' %}#F5EFE8{% else %}#1C1410{% endif %};--pgm-submit-text:{% if scheme == 'dark' %}#1C1410{% else %}#FAF8F5{% endif %}}
+  .pgm{background-color:var(--pgm-bg);color:var(--pgm-text);padding-top:var(--pgm-pt,5rem);padding-bottom:var(--pgm-pb,6rem)}
+  .pgm__hero{position:relative;height:var(--pgm-hero-h,420px);overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .pgm__hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .pgm__hero-overlay{position:absolute;inset:0;background:rgba(0,0,0,var(--pgm-hero-ov,.4));z-index:1}
+  .pgm__hero-content{position:relative;z-index:2;text-align:center;color:#fff;padding:2rem}
+  .pgm__hero-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(2rem,5vw,4rem);font-weight:300;letter-spacing:-.015em;margin:0}
+  .pgm__inner{padding:0 clamp(1.25rem,5vw,5rem)}
+  .pgm__breadcrumb{padding-top:clamp(1.5rem,3vw,2.5rem);margin-bottom:.75rem}
+  .pgm__breadcrumb-list{display:flex;flex-wrap:wrap;gap:.3rem;list-style:none;margin:0;padding:0;font-size:.72rem;color:var(--pgm-muted)}
+  .pgm__breadcrumb-list li{display:flex;align-items:center}
+  .pgm__breadcrumb-list li:not(:last-child)::after{content:'/';margin-left:.3rem;opacity:.4}
+  .pgm__breadcrumb-list a{color:inherit;text-decoration:none}
+  .pgm__page-header{text-align:{% if scheme == 'dark' %}center{% else %}center{% endif %};padding:clamp(2.5rem,5vw,4.5rem) 0 clamp(2rem,4vw,3rem)}
+  .pgm__page-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:300;line-height:1.1;letter-spacing:-.02em;margin:0}
+  .pgm__grid{display:grid;grid-template-columns:1fr;padding-top:clamp(1.5rem,3vw,2rem)}
+  .pgm__grid--has-sidebar{grid-template-columns:1fr 280px;gap:clamp(3rem,6vw,6rem);align-items:start}
+  .pgm--centered .pgm__content{max-width:var(--pgm-max,76ch);margin:0 auto}
+  .pgm__rte{font-size:clamp(.875rem,1.3vw,1rem);font-weight:300;line-height:1.85;color:var(--pgm-muted)}
+  .pgm__rte h1,.pgm__rte h2,.pgm__rte h3,.pgm__rte h4{font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;letter-spacing:-.01em;color:var(--pgm-text);margin:1.5em 0 .65em}
+  .pgm__rte h1{font-size:clamp(1.8rem,3.5vw,2.75rem)}
+  .pgm__rte h2{font-size:clamp(1.4rem,2.5vw,2rem)}
+  .pgm__rte h3{font-size:clamp(1.1rem,1.8vw,1.5rem)}
+  .pgm__rte p{margin:0 0 1em}
+  .pgm__rte ul,.pgm__rte ol{padding-left:1.5em;margin:0 0 1em}
+  .pgm__rte li{margin-bottom:.35em}
+  .pgm__rte a{color:var(--pgm-accent);text-underline-offset:2px}
+  .pgm__rte blockquote{border-left:3px solid var(--pgm-accent);padding:.75em 1.25em;margin:1.5em 0;font-style:italic;color:var(--pgm-text)}
+  .pgm__rte img{max-width:100%;height:auto;border-radius:2px}
+  .pgm__contact{margin-top:clamp(2.5rem,5vw,4rem)}
+  .pgm__contact-heading{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(1.5rem,3vw,2.25rem);font-weight:300;margin:0 0 .5rem}
+  .pgm__contact-sub{font-size:clamp(.85rem,1.2vw,.95rem);color:var(--pgm-muted);margin:0 0 2rem;max-width:52ch}
+  .pgm__form-success{display:flex;align-items:center;gap:.75rem;padding:1.1rem 1.25rem;background:rgba(140,106,72,.12);color:var(--pgm-accent);font-size:.9rem;border:1px solid rgba(140,106,72,.25);margin-bottom:1.5rem}
+  .pgm__form-error{display:flex;align-items:flex-start;gap:.65rem;padding:1rem 1.25rem;background:rgba(184,74,46,.1);color:#B84A2E;font-size:.82rem;border:1px solid rgba(184,74,46,.2);margin-bottom:1.5rem}
+  .pgm__contact-form{display:flex;flex-direction:column;gap:1.25rem}
+  .pgm__form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+  .pgm__field{display:flex;flex-direction:column;gap:.4rem}
+  .pgm__label{font-size:.78rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--pgm-text)}
+  .pgm__label span{color:var(--pgm-muted)}
+  .pgm__input{background-color:var(--pgm-input-bg);border:1.5px solid var(--pgm-border);color:var(--pgm-text);font-family:inherit;font-size:.9rem;font-weight:300;padding:.7em .9em;transition:border-color .2s ease;width:100%}
+  .pgm__input:focus{outline:none;border-color:var(--pgm-accent)}
+  .pgm__input--error{border-color:#B84A2E}
+  .pgm__input--select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236B5B4E' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .8em center;padding-right:2.5em;cursor:pointer}
+  .pgm__textarea{resize:vertical;line-height:1.7}
+  .pgm__submit{width:100%;height:52px;background-color:var(--pgm-submit-bg);color:var(--pgm-submit-text);font-family:inherit;font-size:.82rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;border:1.5px solid transparent;cursor:pointer;transition:background-color .3s ease,color .3s ease,border-color .3s ease;margin-top:.25rem}
+  .pgm__submit:hover{background-color:transparent;color:var(--pgm-text);border-color:var(--pgm-border)}
+  .pgm__submit:focus-visible{outline:2px solid var(--pgm-accent);outline-offset:3px}
+  .pgm__contact-details{display:flex;flex-direction:column;gap:.75rem;margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--pgm-border)}
+  .pgm__contact-detail{display:flex;align-items:flex-start;gap:.65rem;font-size:.85rem;color:var(--pgm-text)}
+  .pgm__contact-detail svg{flex-shrink:0;margin-top:.1em;color:var(--pgm-accent)}
+  .pgm__contact-detail a{color:inherit;text-decoration:none}
+  .pgm__contact-detail a:hover{color:var(--pgm-accent)}
+  .pgm__faq{margin-top:clamp(2.5rem,5vw,4rem);border-top:1px solid var(--pgm-border)}
+  .pgm__faq-heading{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(1.5rem,3vw,2.25rem);font-weight:300;margin:0 0 1.5rem;padding-top:clamp(1.5rem,3vw,2.5rem)}
+  .pgm__faq-item{border-bottom:1px solid var(--pgm-border)}
+  .pgm__faq-question{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.1rem 0;cursor:pointer;list-style:none;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(1rem,1.6vw,1.2rem);font-weight:400;color:var(--pgm-text);user-select:none}
+  .pgm__faq-question::-webkit-details-marker{display:none}
+  .pgm__faq-icon{flex-shrink:0;color:var(--pgm-accent)}
+  .pgm__faq-minus{display:none}
+  .pgm__faq-item[open] .pgm__faq-plus{display:none}
+  .pgm__faq-item[open] .pgm__faq-minus{display:block}
+  .pgm__faq-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s cubic-bezier(.22,1,.36,1);overflow:hidden}
+  .pgm__faq-item[open] .pgm__faq-body{grid-template-rows:1fr}
+  .pgm__faq-answer{overflow:hidden;padding-bottom:1.25rem;font-size:clamp(.85rem,1.2vw,.95rem);font-weight:300;line-height:1.85;color:var(--pgm-muted)}
+  .pgm__faq-answer p{margin:0 0 .75em}
+  .pgm__sidebar{position:sticky;top:calc(var(--header-height,68px) + 2rem)}
+  .pgm__sidebar-block{background:var(--pgm-input-bg);padding:clamp(1.25rem,2.5vw,2rem);border:1px solid var(--pgm-border);margin-bottom:1.5rem}
+  .pgm__sidebar-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:400;margin:0 0 .75rem}
+  .pgm__sidebar-content{font-size:.85rem;font-weight:300;line-height:1.8;color:var(--pgm-muted)}
+  .pgm__sidebar-content p{margin:0 0 .75em}
+  .pgm__sidebar-btn{display:inline-block;margin-top:1rem;padding:.7em 1.75em;background-color:var(--pgm-submit-bg);color:var(--pgm-submit-text);font-family:inherit;font-size:.75rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:opacity .25s ease}
+  .pgm__sidebar-btn:hover{opacity:.82}
+  @media screen and (max-width:899px){.pgm__grid--has-sidebar{grid-template-columns:1fr}.pgm__sidebar{position:static;margin-top:2rem}.pgm__form-row{grid-template-columns:1fr}}
+</style>
+
+{% schema %}
+{
+  "name": "Page — Main",
+  "tag": "section",
+  "class": "section-page-main",
+  "max_blocks": 20,
+  "settings": [
+    { "type": "header", "content": "Page title" },
+    { "type": "checkbox", "id": "show_page_title", "label": "Show page title", "default": true },
+    { "type": "select", "id": "title_alignment", "label": "Title alignment", "options": [{ "value": "left", "label": "Left" },{ "value": "center", "label": "Center" }], "default": "center" },
+    { "type": "header", "content": "Hero banner" },
+    { "type": "checkbox", "id": "show_hero", "label": "Show hero banner image", "default": false },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
+    { "type": "range", "id": "hero_height", "label": "Hero height", "min": 200, "max": 700, "step": 20, "unit": "px", "default": 420 },
+    { "type": "range", "id": "hero_overlay", "label": "Hero overlay darkness", "min": 0, "max": 80, "step": 5, "unit": "%", "default": 45 },
+    { "type": "header", "content": "Layout" },
+    { "type": "select", "id": "layout", "label": "Content layout", "options": [{ "value": "centered", "label": "Centered" },{ "value": "wide", "label": "Wide" },{ "value": "sidebar", "label": "With sidebar" }], "default": "centered" },
+    { "type": "range", "id": "content_max_width", "label": "Content max width (centered)", "min": 50, "max": 120, "step": 2, "unit": "ch", "default": 76 },
+    { "type": "checkbox", "id": "show_breadcrumb", "label": "Show breadcrumb", "default": false },
+    { "type": "header", "content": "Contact form" },
+    { "type": "checkbox", "id": "show_contact_form", "label": "Show contact form", "default": false },
+    { "type": "text", "id": "contact_heading", "label": "Contact heading", "default": "Get in touch" },
+    { "type": "text", "id": "contact_subheading", "label": "Contact subheading" },
+    { "type": "text", "id": "contact_success", "label": "Success message", "default": "Thank you — we will be in touch shortly." },
+    { "type": "checkbox", "id": "show_contact_details", "label": "Show contact details", "default": true },
+    { "type": "text", "id": "contact_email", "label": "Email address" },
+    { "type": "text", "id": "contact_phone", "label": "Phone number" },
+    { "type": "text", "id": "contact_address", "label": "Address" },
+    { "type": "header", "content": "FAQ accordion" },
+    { "type": "checkbox", "id": "show_faq", "label": "Show FAQ section", "default": false },
+    { "type": "text", "id": "faq_heading", "label": "FAQ heading", "default": "Frequently asked questions" },
+    { "type": "header", "content": "Style" },
+    { "type": "select", "id": "color_scheme", "label": "Colour scheme", "options": [{ "value": "light", "label": "Light" },{ "value": "dark", "label": "Dark" }], "default": "light" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ item",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "What is your warranty?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>All our hearths come with a 10-year structural warranty.</p>" }
+      ]
+    },
+    {
+      "type": "sidebar_item",
+      "name": "Sidebar block",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Block title", "default": "Need help?" },
+        { "type": "richtext", "id": "content", "label": "Block content" },
+        { "type": "text", "id": "button_label", "label": "Button label" },
+        { "type": "url", "id": "button_link", "label": "Button link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Editorial page",
+      "settings": { "show_page_title": true, "title_alignment": "center", "layout": "centered", "content_max_width": 76, "show_contact_form": false, "show_faq": false, "color_scheme": "light" }
+    },
+    {
+      "name": "Contact page",
+      "settings": { "show_page_title": true, "title_alignment": "center", "layout": "centered", "show_contact_form": true, "contact_heading": "Get in touch", "show_contact_details": true, "color_scheme": "light" }
+    },
+    {
+      "name": "FAQ page",
+      "settings": { "show_page_title": true, "title_alignment": "center", "layout": "centered", "show_faq": true, "faq_heading": "Frequently asked questions", "color_scheme": "light" },
+      "blocks": [
+        { "type": "faq_item", "settings": { "question": "What is your delivery timeframe?", "answer": "<p>Estimated 5–10 working days after installation survey.</p>" } },
+        { "type": "faq_item", "settings": { "question": "What warranty do you offer?", "answer": "<p>All our hearths come with a 10-year structural warranty.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

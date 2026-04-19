@@ -1,0 +1,27 @@
+{
+  "sections": {
+    "cart-main": {
+      "type": "cart-main",
+      "settings": {
+        "show_order_note": true,
+        "note_label": "Special instructions",
+        "note_placeholder": "Gift wrapping, delivery notes, or any special requests...",
+        "show_upsell": true,
+        "upsell_heading": "You might also like",
+        "show_trust": true,
+        "trust_1": "Free delivery on all UK orders",
+        "trust_icon_1": "truck",
+        "trust_2": "10-year warranty on every product",
+        "trust_icon_2": "shield",
+        "trust_3": "Secure checkout",
+        "trust_icon_3": "lock",
+        "empty_heading": "Your cart is empty",
+        "empty_subheading": "Looks like you haven't added anything yet.",
+        "empty_button_label": "Explore the collection",
+        "empty_button_link": "/collections/all",
+        "color_scheme": "light"
+      }
+    }
+  },
+  "order": ["cart-main"]
+}

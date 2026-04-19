@@ -9,10 +9,9 @@
  */
 {
   "current": {
-    "logo": "shopify://shop_images/Hearth_Favicon.avif",
-    "logo_width": 76,
+    "logo_width": 140,
     "header_sticky": true,
-    "header_text": "#17110C",
+    "header_text": "#1C1410",
     "content_for_index": []
   }
 }

@@ -27,6 +27,11 @@
   if settings.show_announcement and settings.announcement_text != blank
     assign show_announcement = true
   endif
+  assign header_logo_sizes = settings.logo_width | append: 'px'
+  assign mobile_logo_width = settings.logo_width | at_most: 140
+  assign mobile_logo_sizes = mobile_logo_width | append: 'px'
+  assign footer_logo_width = settings.logo_width | at_most: 160
+  assign footer_logo_sizes = footer_logo_width | append: 'px'
 -%}
 <!doctype html>
 <html lang="{{ request.locale.iso_code }}" class="no-js">
@@ -192,7 +197,7 @@ ul[role="list"],ol[role="list"]{list-style:none}
     </button>
     <a href="{{ routes.root_url }}" class="header__logo-link" aria-label="{{ shop.name }}">
       {%- if settings.logo != blank -%}
-        {{- settings.logo | image_url: width: 560 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '140, 200, 280, 420, 560', sizes: '{{ settings.logo_width }}px', class: 'header__logo-img', alt: shop.name -}}
+        {{- settings.logo | image_url: width: 560 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '140, 200, 280, 420, 560', sizes: header_logo_sizes, class: 'header__logo-img', alt: shop.name -}}
       {%- else -%}
         <span class="header__logo-text">{{ shop.name }}</span>
       {%- endif -%}
@@ -232,7 +237,7 @@ ul[role="list"],ol[role="list"]{list-style:none}
   <div class="mobile-menu__header">
     <a href="{{ routes.root_url }}" class="header__logo-link" aria-label="{{ shop.name }}">
       {%- if settings.logo != blank -%}
-        {{- settings.logo | image_url: width: 280 | image_tag: loading: 'lazy', widths: '140, 280', sizes: '{{ settings.logo_width | at_most: 140 }}px', class: 'header__logo-img', alt: shop.name -}}
+        {{- settings.logo | image_url: width: 280 | image_tag: loading: 'lazy', widths: '140, 280', sizes: mobile_logo_sizes, class: 'header__logo-img', alt: shop.name -}}
       {%- else -%}
         <span class="header__logo-text" style="font-size:1.1rem;">{{ shop.name }}</span>
       {%- endif -%}
@@ -284,7 +289,7 @@ ul[role="list"],ol[role="list"]{list-style:none}
     <div class="footer__brand">
       <a href="{{ routes.root_url }}" class="footer__brand-logo" aria-label="{{ shop.name }}">
         {%- if settings.logo != blank -%}
-          {{- settings.logo | image_url: width: 280 | image_tag: loading: 'lazy', widths: '140, 280', sizes: '{{ settings.logo_width | at_most: 160 }}px', alt: shop.name -}}
+          {{- settings.logo | image_url: width: 280 | image_tag: loading: 'lazy', widths: '140, 280', sizes: footer_logo_sizes, alt: shop.name -}}
         {%- else -%}
           <span class="footer__brand-name">{{ shop.name }}</span>
         {%- endif -%}

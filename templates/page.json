@@ -56,7 +56,7 @@
         "faq_item_mXbbX7": {
           "type": "faq_item",
           "settings": {
-            "question": "Af hverju velja svo margir Hearth?",
+            "question": "Hvers vegna Hearth?",
             "answer": "<ul><li><strong>Fá innihaldsefni</strong></li><li><strong>Langvarandi orka</strong></li><li><strong>Mælum með að hrista hann</strong></li><li><strong>Vítamín: A, B, B1, B2 og C</strong></li><li><strong>Steinefni: járn, magnesíum og kalíum</strong></li><li><strong>15 mismunandi amínósýrur</strong></li><li><strong>Náttúrulegt koffín</strong></li><li><strong>Teófyllín og teóbrómín - gefa hægleysandi orku</strong></li></ul>"
           }
         },
@@ -64,7 +64,7 @@
           "type": "faq_item",
           "settings": {
             "question": "Hvað er í Hearth?",
-            "answer": "<p><strong>Hearth er byggður upp af aðeins 3 innihaldsefnum: Yerba Mate, ávaxtabragði og kolsýrðu vatni. Drykkurinn inniheldur engin gerviefni og engan viðbættan sykur.</strong></p><p><strong>Hearth er: Ekkert kjaftæði, bara hreint fæði sem gefur þér flæði.</strong></p>"
+            "answer": "<p><strong>Hearth er byggður upp af aðallega 3 innihaldsefnum: Yerba Mate, ávaxtabragði og kolsýrðu vatni. Drykkurinn inniheldur engin gerviefni og engan viðbættan sykur.</strong></p><p><strong>Hearth er: Ekkert kjaftæði, bara hreint fæði sem gefur þér flæði.</strong></p>"
           }
         },
         "faq_item_Y4e8Rp": {
@@ -78,21 +78,21 @@
           "type": "faq_item",
           "settings": {
             "question": "Er Hearth komið til Íslands?",
-            "answer": "<p><strong>Hearth fæst nú á Íslandi, hægt er að panta á </strong><a href=\"https://drekktuhearth.is/collections/vorur\" title=\"Vörur\"><strong>drekktuhearth.is </strong></a><strong>eða kaupa í verslunum Hagkaups og Olís.</strong></p>"
+            "answer": "<p><strong>Hearth fæst á Íslandi, hægt er að panta á </strong><a href=\"https://drekktuhearth.is/collections/vorur\" title=\"Vörur\"><strong>drekktuhearth.is </strong></a><strong>eða kaupa í verslunum Hagkaups og Olís.</strong></p>"
           }
         },
         "faq_item_mUAh9b": {
           "type": "faq_item",
           "settings": {
             "question": "Hvar fæst Hearth ?",
-            "answer": "<p><strong>Hann fæst á </strong><a href=\"https://drekktuhearth.is/collections/copy-vorur\" title=\"Hearth á Íslandi\"><strong>drekktuhearth.is </strong></a><strong>í netsölu, einnig í Hagkaup og Olís í Gullinbrú og Norðlingaholti.</strong></p>"
+            "answer": "<p><strong>Hann fæst á </strong><a href=\"https://drekktuhearth.is/collections/copy-vorur\" title=\"Hearth á Íslandi\"><strong>drekktuhearth.is </strong></a><strong>í netsölu, einnig í öllum verslunum Hagkaups og vel völdum Olís stöðvum. </strong></p>"
           }
         },
         "faq_item_36JPPB": {
           "type": "faq_item",
           "settings": {
             "question": "Fæst Hearth í verslunum?",
-            "answer": "<p><strong>Hearth fæst í öllum verslunum Hagkaups og verslunum Olís í Gullinbrú og Norðlingaholti, hann er einnig væntanlegur í fleiri verslunum á komandi dögum!</strong></p>"
+            "answer": "<p><strong>Hearth fæst í öllum verslunum Hagkaups og vel völdum Olís stöðvum. </strong></p>"
           }
         }
       },
@@ -125,7 +125,7 @@
         "contact_phone": "",
         "contact_address": "",
         "show_faq": true,
-        "faq_heading": "Frequently asked questions",
+        "faq_heading": "Spurt & Svarað",
         "color_scheme": "light",
         "padding_top": 64,
         "padding_bottom": 96

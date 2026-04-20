@@ -11,6 +11,7 @@
   "sections": {
     "page-main": {
       "type": "page-main",
+      "disabled": true,
       "settings": {
         "show_page_title": true,
         "title_alignment": "center",
@@ -34,9 +35,105 @@
         "padding_top": 80,
         "padding_bottom": 100
       }
+    },
+    "page_main_EVtpxh": {
+      "type": "page-main",
+      "blocks": {
+        "faq_item_ymQMA7": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Hvað er Hearth ?",
+            "answer": "<p><strong>Drink Hearth er orkudrykkur sem er framleiddur í Bretlandi. Markmið Hearth er að fá léttara aðgengi að Yerba Mate þar sem það er frábær orkugjafi.</strong></p>"
+          }
+        },
+        "faq_item_VmA9QU": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Hvað er í Hearth ?",
+            "answer": "<p><strong>Hearth er byggður af Yerba Mate og ávöxtum. Yerba Mate er frábær orkugjafi, svo gefa ávaxtabrögðin drykkjunum meiri ferskleika.</strong></p>"
+          }
+        },
+        "faq_item_mXbbX7": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Af hverju velja svo margir Hearth?",
+            "answer": "<ul><li><strong>Fá innihaldsefni</strong></li><li><strong>Langvarandi orka</strong></li><li><strong>Mælum með að hrista hann</strong></li><li><strong>Vítamín: A, B, B1, B2 og C</strong></li><li><strong>Steinefni: járn, magnesíum og kalíum</strong></li><li><strong>15 mismunandi amínósýrur</strong></li><li><strong>Náttúrulegt koffín</strong></li><li><strong>Teófyllín og teóbrómín - gefa hægleysandi orku</strong></li></ul>"
+          }
+        },
+        "faq_item_64HfWi": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Hvað er í Hearth?",
+            "answer": "<p><strong>Hearth er byggður upp af aðeins 3 innihaldsefnum: Yerba Mate, ávaxtabragði og kolsýrðu vatni. Drykkurinn inniheldur engin gerviefni og engan viðbættan sykur.</strong></p><p><strong>Hearth er: Ekkert kjaftæði, bara hreint fæði sem gefur þér flæði.</strong></p>"
+          }
+        },
+        "faq_item_Y4e8Rp": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Hvað er Yerba Mate?",
+            "answer": "<p><strong>Yerba Mate er Suður-Amerísk jurt sem gefur hreina og stöðuga orku. </strong></p><p><strong>Yerba Mate inniheldur fullt af vítamínum, steinefnum, amínósýrum og andoxunarefnum. Einnig eru tvö náttúruleg efni í Yerba Mate sem vinna saman að stöðugleika í orkustigi. Yerba Mate gerir manni kleift að auka fókus, ná orkustiginu upp, en samt halda sér rólegum líkamlega á sama tíma. Það gefur þér þannig \"mental clarity\". </strong></p>"
+          }
+        },
+        "faq_item_mYji3H": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Er Hearth komið til Íslands?",
+            "answer": "<p><strong>Hearth fæst nú á Íslandi, hægt er að panta á </strong><a href=\"https://drekktuhearth.is/collections/vorur\" title=\"Vörur\"><strong>drekktuhearth.is </strong></a><strong>eða kaupa í verslunum Hagkaups og Olís.</strong></p>"
+          }
+        },
+        "faq_item_mUAh9b": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Hvar fæst Hearth ?",
+            "answer": "<p><strong>Hann fæst á </strong><a href=\"https://drekktuhearth.is/collections/copy-vorur\" title=\"Hearth á Íslandi\"><strong>drekktuhearth.is </strong></a><strong>í netsölu, einnig í Hagkaup og Olís í Gullinbrú og Norðlingaholti.</strong></p>"
+          }
+        },
+        "faq_item_36JPPB": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Fæst Hearth í verslunum?",
+            "answer": "<p><strong>Hearth fæst í öllum verslunum Hagkaups og verslunum Olís í Gullinbrú og Norðlingaholti, hann er einnig væntanlegur í fleiri verslunum á komandi dögum!</strong></p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_ymQMA7",
+        "faq_item_VmA9QU",
+        "faq_item_mXbbX7",
+        "faq_item_64HfWi",
+        "faq_item_Y4e8Rp",
+        "faq_item_mYji3H",
+        "faq_item_mUAh9b",
+        "faq_item_36JPPB"
+      ],
+      "name": "FAQ page",
+      "settings": {
+        "show_page_title": true,
+        "title_alignment": "center",
+        "show_hero": false,
+        "hero_height": 420,
+        "hero_overlay": 45,
+        "layout": "centered",
+        "content_max_width": 76,
+        "show_breadcrumb": true,
+        "show_contact_form": false,
+        "contact_heading": "Get in touch",
+        "contact_subheading": "",
+        "contact_success": "Thank you — we will be in touch shortly.",
+        "show_contact_details": true,
+        "contact_email": "",
+        "contact_phone": "",
+        "contact_address": "",
+        "show_faq": true,
+        "faq_heading": "Frequently asked questions",
+        "color_scheme": "light",
+        "padding_top": 64,
+        "padding_bottom": 96
+      }
     }
   },
   "order": [
-    "page-main"
+    "page-main",
+    "page_main_EVtpxh"
   ]
 }

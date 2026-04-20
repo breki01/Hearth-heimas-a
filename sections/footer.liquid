@@ -93,7 +93,8 @@
     <div class="footer__bottom-inner">
       <p class="footer__legal">
         {%- if section.settings.legal != blank -%}
-          {{ section.settings.legal | replace: '{{ year }}', 'now' | date: '%Y' }}
+          {%- assign current_year = 'now' | date: '%Y' -%}
+          {{ section.settings.legal | replace: '{{ year }}', current_year }}
         {%- else -%}
           &copy; {{ 'now' | date: '%Y' }} {{ shop.name | escape }}. All rights reserved.
         {%- endif -%}

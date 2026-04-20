@@ -52,7 +52,8 @@
           <div class="pgm__contact">
             {%- if section.settings.contact_heading != blank -%}<h2 class="pgm__contact-heading">{{ section.settings.contact_heading | escape }}</h2>{%- endif -%}
             {%- if section.settings.contact_subheading != blank -%}<p class="pgm__contact-sub">{{ section.settings.contact_subheading | escape }}</p>{%- endif -%}
-            {%- form 'contact', class: 'pgm__contact-form', id: 'contact-form-{{ section.id }}' -%}
+            {%- assign contact_form_id = 'contact-form-' | append: section.id -%}
+            {%- form 'contact', class: 'pgm__contact-form', id: contact_form_id -%}
               {%- if form.posted_successfully? -%}
                 <div class="pgm__form-success" role="alert" aria-live="assertive">
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 10L9 12.5L13.5 7.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>

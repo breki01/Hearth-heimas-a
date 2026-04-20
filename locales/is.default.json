@@ -132,13 +132,13 @@
       "continue_shopping": "Halda áfram að versla",
       "continue_shopping_inline": "eða halda áfram að versla",
       "subtotal": "Samtals",
-      "order_summary": "Yfirlit pöntunar",
+      "order_summary": "Pöntun",
       "note": "Athugasemdir við pöntun",
-      "note_placeholder": "Gjafapökkun, athugasemdir um afhendingu eða sérstakar óskir…",
+      "note_placeholder": "Gjafapökkun, afhendingaróskir eða annað sem þú vilt láta vita…",
       "checkout": "Greiða",
       "proceed_to_checkout": "Halda áfram að greiðslu",
       "update": "Uppfæra",
-      "taxes_and_shipping_at_checkout": "Skattar og sendingarkostnaður reiknast við greiðslu",
+      "taxes_and_shipping_at_checkout": "Virðisaukaskattur og sendingarkostnaður reiknast við greiðslu",
       "estimated_total": "Áætlað heildarverð"
     },
     "items": {

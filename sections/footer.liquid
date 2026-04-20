@@ -94,7 +94,7 @@
       <p class="footer__legal">
         {%- if section.settings.legal != blank -%}
           {%- assign current_year = 'now' | date: '%Y' -%}
-          {{ section.settings.legal | replace: '{{ year }}', current_year }}
+          {{ section.settings.legal | replace: '[year]', current_year }}
         {%- else -%}
           &copy; {{ 'now' | date: '%Y' }} {{ shop.name | escape }}. All rights reserved.
         {%- endif -%}
@@ -166,7 +166,7 @@
     { "type": "color", "id": "footer_text_muted", "label": "Footer muted text", "default": "#A8947E" },
     { "type": "color", "id": "footer_border", "label": "Footer border", "default": "#2C1E14" },
     { "type": "header", "content": "Bottom bar" },
-    { "type": "richtext", "id": "legal", "label": "Legal / copyright text", "info": "Use {{ year }} to insert the current year." }
+    { "type": "richtext", "id": "legal", "label": "Legal / copyright text", "info": "Use [year] to insert the current year." }
   ],
   "blocks": [
     {

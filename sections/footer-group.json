@@ -50,11 +50,11 @@
         "menu-support"
       ],
       "settings": {
-        "tagline": "Handcrafted hearths and fireplaces, built to last a lifetime.",
+        "tagline": "Ekkert kjaftæði, bara hreint fæði\nsem gefur þér flæði!",
         "footer_logo_width": 160,
         "show_newsletter": true,
-        "newsletter_heading": "Stay warm",
-        "newsletter_sub": "Inspiration, new arrivals, and exclusive offers.",
+        "newsletter_heading": "Vertu fyrstur að frétta",
+        "newsletter_sub": "Fáðu fréttir af tilboðum sem Hearth býður upp á, skráðu þig á póstlistann okkar.",
         "footer_bg": "#17110c",
         "footer_text": "#f5efe8",
         "footer_text_muted": "#a8947e",

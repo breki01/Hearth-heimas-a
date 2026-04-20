@@ -38,8 +38,8 @@
         "menu-support": {
           "type": "menu",
           "settings": {
-            "heading": "Support",
-            "menu": ""
+            "heading": "Hvað er Yerba Mate ?",
+            "menu": "hva-er-yerba-mate"
           }
         }
       },

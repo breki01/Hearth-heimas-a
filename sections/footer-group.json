@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "footer",
   "name": "Footer",
@@ -5,6 +14,13 @@
     "footer": {
       "type": "footer",
       "blocks": {
+        "menu_XebWgA": {
+          "type": "menu",
+          "settings": {
+            "heading": "Stefnur",
+            "menu": "stefnur"
+          }
+        },
         "menu-shop": {
           "type": "menu",
           "settings": {
@@ -15,29 +31,39 @@
         "menu-company": {
           "type": "menu",
           "settings": {
-            "heading": "Company"
+            "heading": "Company",
+            "menu": ""
           }
         },
         "menu-support": {
           "type": "menu",
           "settings": {
-            "heading": "Support"
+            "heading": "Support",
+            "menu": ""
           }
         }
       },
-      "block_order": ["menu-shop", "menu-company", "menu-support"],
+      "block_order": [
+        "menu_XebWgA",
+        "menu-shop",
+        "menu-company",
+        "menu-support"
+      ],
       "settings": {
         "tagline": "Handcrafted hearths and fireplaces, built to last a lifetime.",
         "footer_logo_width": 160,
         "show_newsletter": true,
         "newsletter_heading": "Stay warm",
         "newsletter_sub": "Inspiration, new arrivals, and exclusive offers.",
-        "footer_bg": "#17110C",
-        "footer_text": "#F5EFE8",
-        "footer_text_muted": "#A8947E",
-        "footer_border": "#2C1E14"
+        "footer_bg": "#17110c",
+        "footer_text": "#f5efe8",
+        "footer_text_muted": "#a8947e",
+        "footer_border": "#2c1e14",
+        "legal": ""
       }
     }
   },
-  "order": ["footer"]
+  "order": [
+    "footer"
+  ]
 }

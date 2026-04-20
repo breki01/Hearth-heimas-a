@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "header",
   "name": "Header",
@@ -8,15 +17,20 @@
         "default-announcement": {
           "type": "announcement",
           "settings": {
-            "text": "Free nationwide installation on all orders."
+            "text": "Free nationwide installation on all orders.",
+            "link": "",
+            "bg_color_override": "",
+            "text_color_override": ""
           }
         }
       },
-      "block_order": ["default-announcement"],
+      "block_order": [
+        "default-announcement"
+      ],
       "settings": {
         "show_bar": false,
-        "bg_color": "#1C1410",
-        "text_color": "#FAF8F5"
+        "bg_color": "#1c1410",
+        "text_color": "#faf8f5"
       }
     },
     "header": {
@@ -26,12 +40,15 @@
         "header_menu": "main-menu",
         "header_sticky": true,
         "header_transparent": true,
-        "header_bg": "#FAF8F5",
-        "header_text": "#1C1410",
-        "header_text_transparent": "#FFFFFF",
+        "header_bg": "#faf8f5",
+        "header_text": "#1c1410",
+        "header_text_transparent": "#ffffff",
         "header_height": 68
       }
     }
   },
-  "order": ["announcement-bar", "header"]
+  "order": [
+    "announcement-bar",
+    "header"
+  ]
 }

@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "cart-main": {
@@ -9,19 +18,21 @@
         "show_upsell": true,
         "upsell_heading": "You might also like",
         "show_trust": true,
-        "trust_1": "Free delivery on all UK orders",
+        "trust_1": "Frí heimsending á Höfuðborgarsvæðinu",
         "trust_icon_1": "truck",
-        "trust_2": "10-year warranty on every product",
+        "trust_2": "Náttúruleg orka",
         "trust_icon_2": "shield",
         "trust_3": "Secure checkout",
         "trust_icon_3": "lock",
-        "empty_heading": "Your cart is empty",
-        "empty_subheading": "Looks like you haven't added anything yet.",
-        "empty_button_label": "Explore the collection",
+        "empty_heading": "Karfan þín er tóm",
+        "empty_subheading": "Þú hefur ekki bætt neinu í körfuna.",
+        "empty_button_label": "Skoða Hearth",
         "empty_button_link": "/collections/all",
         "color_scheme": "light"
       }
     }
   },
-  "order": ["cart-main"]
+  "order": [
+    "cart-main"
+  ]
 }

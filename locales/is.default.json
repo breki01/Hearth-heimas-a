@@ -1,0 +1,360 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_text": "Fara í meginefni",
+      "close": "Loka",
+      "menu": "Valmynd",
+      "open_drawer_menu": "Opna valmynd",
+      "close_drawer_menu": "Loka valmynd",
+      "loading": "Hleður…",
+      "unit_price_separator": "á",
+      "previous": "Fyrri",
+      "next": "Næsti",
+      "previous_page": "Fyrri síða",
+      "next_page": "Næsta síða"
+    },
+    "meta": {
+      "tags": "Merkt \"{{ tags }}\"",
+      "page": "Síða {{ page }}"
+    },
+    "social": {
+      "share_on_facebook": "Deila á Facebook",
+      "share_on_twitter": "Tvíta á X",
+      "share_on_pinterest": "Pinna á Pinterest",
+      "share_on_instagram": "Fylgja á Instagram",
+      "share_on_youtube": "Gerast áskrifandi á YouTube",
+      "share_on_tiktok": "Fylgja á TikTok",
+      "links_label": "Tenglar á samfélagsmiðla"
+    },
+    "search": {
+      "search": "Leita",
+      "placeholder": "Leita í versluninni",
+      "no_results": "Engar niðurstöður fundust. Reyndu aðra leit.",
+      "results_for": "Niðurstöður fyrir \"{{ terms }}\""
+    },
+    "newsletter": {
+      "heading": "Haltu hita á",
+      "subheading": "Innblástur, nýjar vörur og einkatilboð.",
+      "email_placeholder": "Netfangið þitt",
+      "button_label": "Skrá mig",
+      "success": "Takk — þú ert komin/n á listann.",
+      "error": "Því miður, eitthvað fór úrskeiðis. Reyndu aftur."
+    },
+    "password_page": {
+      "login_form_heading": "Skráðu þig inn í verslunina",
+      "login_form_password_label": "Lykilorð",
+      "login_form_password_placeholder": "Lykilorðið þitt",
+      "login_form_submit": "Áfram",
+      "login_form_error": "Rangt lykilorð — reyndu aftur",
+      "admin_link_html": "Ertu eigandi verslunarinnar? <a href=\"/admin\">Skráðu þig inn hér</a>",
+      "opening_soon": "Opnum fljótlega",
+      "powered_by_shopify_html": "Þessi verslun verður knúin af {{ shopify }}"
+    },
+    "404": {
+      "title": "Síðan fannst ekki",
+      "subtext": "Síðan sem þú leitar að er ekki lengur til.",
+      "link": "Halda áfram að versla"
+    }
+  },
+  "products": {
+    "general": {
+      "sale_price": "Tilboðsverð",
+      "regular_price": "Almennt verð",
+      "from_price_html": "Frá {{ price }}",
+      "sold_out": "Uppselt",
+      "on_sale": "Tilboð",
+      "new": "Nýtt",
+      "vendor": "Framleiðandi",
+      "sku": "Vörunúmer",
+      "save_html": "Sparaðu {{ saved_amount }}",
+      "save_percent_html": "Sparaðu {{ percent }}%",
+      "unit_price_label": "Einingarverð",
+      "compare_at_price": "Upprunalegt verð",
+      "tax_included": "Virðisaukaskattur innifalinn."
+    },
+    "product": {
+      "add_to_cart": "Bæta í körfu",
+      "adding": "Bæti við…",
+      "added": "Bætt við",
+      "sold_out": "Uppselt",
+      "unavailable": "Ekki í boði",
+      "view_details": "Skoða nánar",
+      "pickup_availability": "Sótt í verslun",
+      "description": "Lýsing",
+      "specifications": "Eiginleikar",
+      "shipping": "Sending og uppsetning",
+      "warranty": "Ábyrgð",
+      "breadcrumb_aria": "Brauðmolar",
+      "breadcrumb_home": "Heim",
+      "image_aria": "Mynd {{ index }}",
+      "view_image_aria": "Skoða mynd {{ index }}",
+      "product_images_aria": "Vörumyndir",
+      "select_variant_aria": "Velja útgáfu",
+      "add_title_to_cart_aria": "Bæta {{ title }} í körfu"
+    },
+    "quantity": {
+      "label": "Magn",
+      "decrease": "Minnka magn",
+      "increase": "Auka magn",
+      "minimum_of": "Að lágmarki {{ quantity }}",
+      "maximum_of": "Að hámarki {{ quantity }}"
+    },
+    "variants": {
+      "color": "Litur",
+      "size": "Stærð",
+      "material": "Efni",
+      "style": "Útlit",
+      "selected": "Valið: {{ value }}"
+    },
+    "facets": {
+      "apply": "Staðfesta",
+      "clear": "Hreinsa",
+      "clear_all": "Hreinsa allt",
+      "filter_by": "Sía",
+      "filter_and_sort": "Sía og raða",
+      "sort_by_label": "Raða eftir",
+      "results_count": "{{ count }} niðurstöður",
+      "price_range": "Verð",
+      "from": "Frá",
+      "to": "Til",
+      "active_filters_aria": "Virkar síur",
+      "filters_aria": "Síur",
+      "products_aria": "Vörur",
+      "pagination_aria": "Síðun"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Karfa",
+      "your_cart": "Karfan þín",
+      "empty": "Karfan þín er tóm",
+      "empty_subheading": "Það lítur út fyrir að þú hafir ekki bætt neinu við ennþá.",
+      "continue_shopping": "Halda áfram að versla",
+      "continue_shopping_inline": "eða halda áfram að versla",
+      "subtotal": "Samtals",
+      "order_summary": "Yfirlit pöntunar",
+      "note": "Athugasemdir við pöntun",
+      "note_placeholder": "Gjafapökkun, athugasemdir um afhendingu eða sérstakar óskir…",
+      "checkout": "Greiða",
+      "proceed_to_checkout": "Halda áfram að greiðslu",
+      "update": "Uppfæra",
+      "taxes_and_shipping_at_checkout": "Skattar og sendingarkostnaður reiknast við greiðslu",
+      "estimated_total": "Áætlað heildarverð"
+    },
+    "items": {
+      "product": "Vara",
+      "quantity": "Magn",
+      "total": "Samtala",
+      "remove": "Fjarlægja",
+      "remove_aria": "Fjarlægja {{ title }} úr körfu",
+      "decrease_aria": "Minnka magn af {{ title }}",
+      "increase_aria": "Auka magn af {{ title }}",
+      "edit": "Breyta",
+      "each": "{{ money }} hvert",
+      "count": {
+        "one": "{{ count }} vara",
+        "other": "{{ count }} vörur"
+      }
+    }
+  },
+  "customer": {
+    "account": {
+      "title": "Mitt svæði",
+      "details": "Upplýsingar um reikning",
+      "view_addresses": "Skoða heimilisföng",
+      "return": "Til baka í reikning",
+      "log_out": "Skrá út"
+    },
+    "login": {
+      "title": "Innskráning",
+      "email": "Netfang",
+      "password": "Lykilorð",
+      "forgot_password": "Gleymt lykilorð?",
+      "sign_in": "Skrá inn",
+      "guest_title": "Halda áfram sem gestur",
+      "guest_continue": "Halda áfram"
+    },
+    "register": {
+      "title": "Stofna reikning",
+      "first_name": "Fornafn",
+      "last_name": "Eftirnafn",
+      "email": "Netfang",
+      "password": "Lykilorð",
+      "submit": "Stofna"
+    },
+    "recover_password": {
+      "title": "Endurstilla lykilorð",
+      "email": "Netfang",
+      "submit": "Senda",
+      "cancel": "Hætta við",
+      "subtext": "Við sendum þér tölvupóst til að endurstilla lykilorðið.",
+      "success": "Við höfum sent þér tölvupóst með hlekk til að uppfæra lykilorðið."
+    },
+    "reset_password": {
+      "title": "Endurstilla lykilorð",
+      "subtext": "Sláðu inn nýtt lykilorð fyrir {{ email }}.",
+      "password": "Lykilorð",
+      "password_confirm": "Staðfesta lykilorð",
+      "submit": "Endurstilla lykilorð"
+    },
+    "addresses": {
+      "title": "Heimilisföngin þín",
+      "default": "Sjálfgefið",
+      "add_new": "Bæta við heimilisfangi",
+      "edit_address": "Breyta heimilisfangi",
+      "first_name": "Fornafn",
+      "last_name": "Eftirnafn",
+      "company": "Fyrirtæki",
+      "address1": "Heimilisfang 1",
+      "address2": "Heimilisfang 2",
+      "city": "Borg",
+      "country": "Land",
+      "province": "Svæði",
+      "zip": "Póstnúmer",
+      "phone": "Sími",
+      "set_default": "Setja sem sjálfgefið heimilisfang",
+      "add": "Bæta við heimilisfangi",
+      "update": "Uppfæra heimilisfang",
+      "delete": "Eyða heimilisfangi",
+      "delete_confirm": "Ertu viss um að þú viljir eyða þessu heimilisfangi?"
+    },
+    "orders": {
+      "title": "Pantanayfirlit",
+      "order_number": "Pöntun",
+      "order_number_link": "Pöntun númer {{ number }}",
+      "date": "Dagsetning",
+      "payment_status": "Staða greiðslu",
+      "fulfillment_status": "Staða afhendingar",
+      "total": "Samtala",
+      "none": "Þú hefur ekki pantað neitt ennþá."
+    },
+    "order": {
+      "title": "Pöntun {{ name }}",
+      "date_html": "Pantað {{ date }}",
+      "cancelled": "Pöntun afturkölluð {{ date }}",
+      "cancelled_reason": "Ástæða: {{ reason }}",
+      "billing_address": "Reikningsfang",
+      "shipping_address": "Sendingarfang",
+      "payment_status": "Staða greiðslu",
+      "fulfillment_status": "Staða afhendingar",
+      "discount": "Afsláttur",
+      "shipping": "Sending",
+      "tax": "Skattur",
+      "product": "Vara",
+      "sku": "Vörunúmer",
+      "price": "Verð",
+      "quantity": "Magn",
+      "total": "Samtala",
+      "subtotal": "Millisamtala"
+    }
+  },
+  "blogs": {
+    "article": {
+      "blog": "Blogg",
+      "posted_in": "Birt í",
+      "tags": "Merki",
+      "read_more": "Lesa meira",
+      "back_to_blog": "Til baka í {{ title }}",
+      "older_post": "Eldri færsla",
+      "newer_post": "Nýrri færsla",
+      "comments_with_count": {
+        "one": "{{ count }} athugasemd",
+        "other": "{{ count }} athugasemdir"
+      }
+    },
+    "comments": {
+      "title": "Skildu eftir athugasemd",
+      "name": "Nafn",
+      "email": "Netfang",
+      "message": "Skilaboð",
+      "post": "Senda athugasemd",
+      "moderated": "Athugaðu að athugasemdir þurfa samþykki áður en þær birtast.",
+      "success_moderated": "Takk — athugasemdin þín hefur verið send og bíður samþykkis.",
+      "success": "Takk — athugasemdin þín hefur verið birt."
+    }
+  },
+  "sections": {
+    "header": {
+      "announcement": "Tilkynning",
+      "announcements_aria": "Tilkynningar",
+      "menu": "Valmynd",
+      "main_navigation_aria": "Aðalvalmynd",
+      "mobile_navigation_aria": "Farsímavalmynd",
+      "social_links_aria": "Samfélagsmiðlar",
+      "search_aria": "Leita",
+      "cart_aria": "Karfa",
+      "cart_aria_with_count": {
+        "one": "Karfa — {{ count }} vara",
+        "other": "Karfa — {{ count }} vörur"
+      },
+      "toggle_submenu_aria": "Opna/loka undirvalmynd fyrir {{ title }}",
+      "cart_count": {
+        "one": "{{ count }} vara",
+        "other": "{{ count }} vörur"
+      }
+    },
+    "footer": {
+      "copyright_html": "© {{ year }} {{ shop_name }}",
+      "menu_aria": "Tenglar í fót",
+      "payment_methods_aria": "Samþykktar greiðsluaðferðir",
+      "all_rights_reserved": "Allur réttur áskilinn.",
+      "thank_you_subscribed": "Takk fyrir að skrá þig!"
+    },
+    "cart": {
+      "title": "Karfa"
+    },
+    "collection_template": {
+      "title": "Flokkur",
+      "empty": "Engar vörur fundust",
+      "use_fewer_filters_html": "Notaðu færri síur eða <a href=\"{{ link }}\">hreinsaðu allt</a>"
+    },
+    "featured_collection": {
+      "view_all": "Skoða allt"
+    },
+    "testimonials": {
+      "section_aria": "Umsagnir viðskiptavina",
+      "carousel_aria": "Umsagnir",
+      "previous_aria": "Fyrri umsögn",
+      "next_aria": "Næsta umsögn",
+      "select_aria": "Veldu umsögn",
+      "pause_aria": "Stöðva sjálfvirkt",
+      "play_aria": "Spila sjálfvirkt",
+      "slide_aria": "Umsögn {{ index }} af {{ total }}",
+      "go_to_aria": "Fara í umsögn {{ index }}"
+    },
+    "marquee": {
+      "aria": "Eiginleikar"
+    },
+    "page": {
+      "breadcrumb_aria": "Brauðmolar",
+      "sidebar_aria": "Viðbótarupplýsingar",
+      "send_message": "Senda skilaboð",
+      "form_success": "Takk — við höfum samband fljótlega.",
+      "contact": {
+        "name": "Nafn",
+        "subject": "Efni",
+        "subject_placeholder": "Veldu…",
+        "subject_general": "Almenn fyrirspurn",
+        "subject_product": "Vörufyrirspurn",
+        "subject_installation": "Uppsetning",
+        "subject_warranty": "Ábyrgð",
+        "subject_order": "Pöntun",
+        "subject_other": "Annað",
+        "message": "Skilaboð"
+      }
+    }
+  },
+  "accessibility": {
+    "skip_to_content": "Fara í meginefni",
+    "close": "Loka",
+    "unit_price_separator": "á",
+    "vendor": "Framleiðandi",
+    "error": "Villa",
+    "refresh_page": "Val á þessum möguleika endurnýjar síðuna.",
+    "link_messages": {
+      "new_window": "Opnar í nýjum glugga.",
+      "external": "Opnar utanaðkomandi vefsíðu."
+    },
+    "loading": "Hleður…"
+  }
+}

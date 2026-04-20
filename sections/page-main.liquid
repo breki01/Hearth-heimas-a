@@ -27,9 +27,9 @@
   <div class="pgm__inner">
 
     {%- if section.settings.show_breadcrumb -%}
-      <nav class="pgm__breadcrumb" aria-label="Breadcrumb">
+      <nav class="pgm__breadcrumb" aria-label="{{ 'sections.page.breadcrumb_aria' | t }}">
         <ol class="pgm__breadcrumb-list" role="list">
-          <li><a href="{{ routes.root_url }}">Home</a></li>
+          <li><a href="{{ routes.root_url }}">{{ 'products.product.breadcrumb_home' | t }}</a></li>
           <li aria-current="page">{{ page.title | escape }}</li>
         </ol>
       </nav>
@@ -57,7 +57,7 @@
               {%- if form.posted_successfully? -%}
                 <div class="pgm__form-success" role="alert" aria-live="assertive">
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 10L9 12.5L13.5 7.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  {{ section.settings.contact_success | default: 'Thank you — we will be in touch shortly.' | escape }}
+                  {%- if section.settings.contact_success != blank -%}{{ section.settings.contact_success | escape }}{%- else -%}{{ 'sections.page.form_success' | t }}{%- endif -%}
                 </div>
               {%- else -%}
                 {%- if form.errors -%}
@@ -68,37 +68,37 @@
                 {%- endif -%}
                 <div class="pgm__form-row">
                   <div class="pgm__field">
-                    <label for="contact-name-{{ section.id }}" class="pgm__label">Name <span aria-hidden="true">*</span></label>
+                    <label for="contact-name-{{ section.id }}" class="pgm__label">{{ 'sections.page.contact.name' | t }} <span aria-hidden="true">*</span></label>
                     <input type="text" id="contact-name-{{ section.id }}" name="contact[name]" class="pgm__input{% if form.errors contains 'name' %} pgm__input--error{% endif %}" autocomplete="name" required aria-required="true" value="{{ form.name }}">
                   </div>
                   <div class="pgm__field">
-                    <label for="contact-email-{{ section.id }}" class="pgm__label">Email <span aria-hidden="true">*</span></label>
+                    <label for="contact-email-{{ section.id }}" class="pgm__label">{{ 'customer.login.email' | t }} <span aria-hidden="true">*</span></label>
                     <input type="email" id="contact-email-{{ section.id }}" name="contact[email]" class="pgm__input{% if form.errors contains 'email' %} pgm__input--error{% endif %}" autocomplete="email" required aria-required="true" value="{{ form.email }}">
                   </div>
                 </div>
                 <div class="pgm__form-row">
                   <div class="pgm__field">
-                    <label for="contact-phone-{{ section.id }}" class="pgm__label">Phone</label>
+                    <label for="contact-phone-{{ section.id }}" class="pgm__label">{{ 'customer.addresses.phone' | t }}</label>
                     <input type="tel" id="contact-phone-{{ section.id }}" name="contact[phone]" class="pgm__input" autocomplete="tel" value="{{ form.phone }}">
                   </div>
                   <div class="pgm__field">
-                    <label for="contact-subject-{{ section.id }}" class="pgm__label">Subject</label>
+                    <label for="contact-subject-{{ section.id }}" class="pgm__label">{{ 'sections.page.contact.subject' | t }}</label>
                     <select id="contact-subject-{{ section.id }}" name="contact[subject]" class="pgm__input pgm__input--select">
-                      <option value="">Please select…</option>
-                      <option value="General enquiry">General enquiry</option>
-                      <option value="Product enquiry">Product enquiry</option>
-                      <option value="Installation">Installation</option>
-                      <option value="Warranty">Warranty</option>
-                      <option value="Order">Order</option>
-                      <option value="Other">Other</option>
+                      <option value="">{{ 'sections.page.contact.subject_placeholder' | t }}</option>
+                      <option value="General enquiry">{{ 'sections.page.contact.subject_general' | t }}</option>
+                      <option value="Product enquiry">{{ 'sections.page.contact.subject_product' | t }}</option>
+                      <option value="Installation">{{ 'sections.page.contact.subject_installation' | t }}</option>
+                      <option value="Warranty">{{ 'sections.page.contact.subject_warranty' | t }}</option>
+                      <option value="Order">{{ 'sections.page.contact.subject_order' | t }}</option>
+                      <option value="Other">{{ 'sections.page.contact.subject_other' | t }}</option>
                     </select>
                   </div>
                 </div>
                 <div class="pgm__field">
-                  <label for="contact-message-{{ section.id }}" class="pgm__label">Message <span aria-hidden="true">*</span></label>
+                  <label for="contact-message-{{ section.id }}" class="pgm__label">{{ 'sections.page.contact.message' | t }} <span aria-hidden="true">*</span></label>
                   <textarea id="contact-message-{{ section.id }}" name="contact[body]" class="pgm__input pgm__textarea{% if form.errors contains 'body' %} pgm__input--error{% endif %}" rows="5" required aria-required="true">{{ form.body }}</textarea>
                 </div>
-                <button type="submit" class="pgm__submit">Send message</button>
+                <button type="submit" class="pgm__submit">{{ 'sections.page.send_message' | t }}</button>
               {%- endif -%}
             {%- endform -%}
           </div>
@@ -146,7 +146,7 @@
       </div>
 
       {%- if has_sidebar -%}
-        <aside class="pgm__sidebar" aria-label="Additional information">
+        <aside class="pgm__sidebar" aria-label="{{ 'sections.page.sidebar_aria' | t }}">
           {%- for block in sidebar_blocks -%}
             <div class="pgm__sidebar-block" {{ block.shopify_attributes }}>
               {%- if block.settings.title != blank -%}<h3 class="pgm__sidebar-title">{{ block.settings.title | escape }}</h3>{%- endif -%}

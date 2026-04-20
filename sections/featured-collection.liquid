@@ -74,7 +74,7 @@
                 <form method="post" action="/cart/add" class="fc__atc-form">
                   <input type="hidden" name="id" value="{{ first_variant.id }}">
                   <input type="hidden" name="quantity" value="1">
-                  <button type="submit" name="add" class="fc__atc-btn" aria-label="Add {{ product.title | escape }} to cart">Add to cart</button>
+                  <button type="submit" name="add" class="fc__atc-btn" aria-label="{{ 'products.product.add_title_to_cart_aria' | t: title: product.title }}">{{ 'products.product.add_to_cart' | t }}</button>
                 </form>
               {%- else -%}
                 <button class="fc__atc-btn fc__atc-btn--disabled" disabled>Sold out</button>

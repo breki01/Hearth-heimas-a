@@ -7,7 +7,11 @@
       "open_drawer_menu": "Open menu",
       "close_drawer_menu": "Close menu",
       "loading": "Loading…",
-      "unit_price_separator": "per"
+      "unit_price_separator": "per",
+      "previous": "Previous",
+      "next": "Next",
+      "previous_page": "Previous page",
+      "next_page": "Next page"
     },
     "meta": {
       "tags": "Tagged \"{{ tags }}\"",
@@ -19,7 +23,8 @@
       "share_on_pinterest": "Pin on Pinterest",
       "share_on_instagram": "Follow on Instagram",
       "share_on_youtube": "Subscribe on YouTube",
-      "share_on_tiktok": "Follow on TikTok"
+      "share_on_tiktok": "Follow on TikTok",
+      "links_label": "Social media links"
     },
     "search": {
       "search": "Search",
@@ -62,8 +67,10 @@
       "vendor": "Vendor",
       "sku": "SKU",
       "save_html": "Save {{ saved_amount }}",
+      "save_percent_html": "Save {{ percent }}%",
       "unit_price_label": "Unit price",
-      "compare_at_price": "Compare at price"
+      "compare_at_price": "Compare at price",
+      "tax_included": "Tax included."
     },
     "product": {
       "add_to_cart": "Add to cart",
@@ -76,7 +83,14 @@
       "description": "Description",
       "specifications": "Specifications",
       "shipping": "Shipping & installation",
-      "warranty": "Warranty"
+      "warranty": "Warranty",
+      "breadcrumb_aria": "Breadcrumb",
+      "breadcrumb_home": "Home",
+      "image_aria": "Image {{ index }}",
+      "view_image_aria": "View image {{ index }}",
+      "product_images_aria": "Product images",
+      "select_variant_aria": "Select variant",
+      "add_title_to_cart_aria": "Add {{ title }} to cart"
     },
     "quantity": {
       "label": "Quantity",
@@ -102,18 +116,27 @@
       "results_count": "{{ count }} results",
       "price_range": "Price",
       "from": "From",
-      "to": "To"
+      "to": "To",
+      "active_filters_aria": "Active filters",
+      "filters_aria": "Filters",
+      "products_aria": "Products",
+      "pagination_aria": "Pagination"
     }
   },
   "cart": {
     "general": {
       "title": "Cart",
+      "your_cart": "Your cart",
       "empty": "Your cart is empty",
+      "empty_subheading": "Looks like you haven't added anything yet.",
       "continue_shopping": "Continue shopping",
+      "continue_shopping_inline": "or continue shopping",
       "subtotal": "Subtotal",
+      "order_summary": "Order summary",
       "note": "Order notes",
       "note_placeholder": "Gift wrapping, delivery notes, or any special requests…",
       "checkout": "Checkout",
+      "proceed_to_checkout": "Proceed to checkout",
       "update": "Update",
       "taxes_and_shipping_at_checkout": "Taxes and shipping calculated at checkout",
       "estimated_total": "Estimated total"
@@ -122,9 +145,16 @@
       "product": "Product",
       "quantity": "Quantity",
       "total": "Total",
-      "remove": "Remove {{ title }}",
+      "remove": "Remove",
+      "remove_aria": "Remove {{ title }} from cart",
+      "decrease_aria": "Decrease quantity of {{ title }}",
+      "increase_aria": "Increase quantity of {{ title }}",
       "edit": "Edit",
-      "each": "{{ money }} each"
+      "each": "{{ money }} each",
+      "count": {
+        "one": "{{ count }} item",
+        "other": "{{ count }} items"
+      }
     }
   },
   "customer": {
@@ -246,14 +276,29 @@
   "sections": {
     "header": {
       "announcement": "Announcement",
+      "announcements_aria": "Announcements",
       "menu": "Menu",
+      "main_navigation_aria": "Main navigation",
+      "mobile_navigation_aria": "Mobile navigation",
+      "social_links_aria": "Social links",
+      "search_aria": "Search",
+      "cart_aria": "Cart",
+      "cart_aria_with_count": {
+        "one": "Cart — {{ count }} item",
+        "other": "Cart — {{ count }} items"
+      },
+      "toggle_submenu_aria": "Toggle {{ title }} submenu",
       "cart_count": {
         "one": "{{ count }} item",
         "other": "{{ count }} items"
       }
     },
     "footer": {
-      "copyright_html": "© {{ year }} {{ shop_name }}"
+      "copyright_html": "© {{ year }} {{ shop_name }}",
+      "menu_aria": "Footer menu",
+      "payment_methods_aria": "Accepted payment methods",
+      "all_rights_reserved": "All rights reserved.",
+      "thank_you_subscribed": "Thank you for subscribing!"
     },
     "cart": {
       "title": "Cart"
@@ -265,6 +310,38 @@
     },
     "featured_collection": {
       "view_all": "View all"
+    },
+    "testimonials": {
+      "section_aria": "Customer testimonials",
+      "carousel_aria": "Testimonials",
+      "previous_aria": "Previous testimonial",
+      "next_aria": "Next testimonial",
+      "select_aria": "Select testimonial",
+      "pause_aria": "Pause auto-play",
+      "play_aria": "Play auto-play",
+      "slide_aria": "Testimonial {{ index }} of {{ total }}",
+      "go_to_aria": "Go to testimonial {{ index }}"
+    },
+    "marquee": {
+      "aria": "Features"
+    },
+    "page": {
+      "breadcrumb_aria": "Breadcrumb",
+      "sidebar_aria": "Additional information",
+      "send_message": "Send message",
+      "form_success": "Thanks — we will be in touch shortly.",
+      "contact": {
+        "name": "Name",
+        "subject": "Subject",
+        "subject_placeholder": "Please select…",
+        "subject_general": "General enquiry",
+        "subject_product": "Product enquiry",
+        "subject_installation": "Installation",
+        "subject_warranty": "Warranty",
+        "subject_order": "Order",
+        "subject_other": "Other",
+        "message": "Message"
+      }
     }
   },
   "accessibility": {

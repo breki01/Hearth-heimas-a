@@ -5,7 +5,7 @@
   assign layout = section.settings.layout
 -%}
 {%- if block_count > 0 -%}
-<section id="testimonials-{{ section.id }}" class="tst tst--{{ scheme }} tst--{{ layout }}" aria-label="Customer testimonials" style="--tst-pt:{{ section.settings.padding_top }}px;--tst-pb:{{ section.settings.padding_bottom }}px;--tst-cols:{{ section.settings.columns }};--tst-speed:{{ section.settings.autoplay_speed }}000ms;">
+<section id="testimonials-{{ section.id }}" class="tst tst--{{ scheme }} tst--{{ layout }}" aria-label="{{ 'sections.testimonials.section_aria' | t }}" style="--tst-pt:{{ section.settings.padding_top }}px;--tst-pb:{{ section.settings.padding_bottom }}px;--tst-cols:{{ section.settings.columns }};--tst-speed:{{ section.settings.autoplay_speed }}000ms;">
   {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
     <header class="tst__header">
       {%- if section.settings.eyebrow != blank -%}<p class="tst__eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
@@ -13,7 +13,7 @@
       {%- if section.settings.subheading != blank -%}<p class="tst__subheading">{{ section.settings.subheading | escape }}</p>{%- endif -%}
     </header>
   {%- endif -%}
-  <div class="tst__carousel" data-autoplay="{{ section.settings.autoplay }}" data-speed="{{ section.settings.autoplay_speed }}" data-layout="{{ layout }}" role="region" aria-roledescription="carousel" aria-label="Testimonials">
+  <div class="tst__carousel" data-autoplay="{{ section.settings.autoplay }}" data-speed="{{ section.settings.autoplay_speed }}" data-layout="{{ layout }}" role="region" aria-roledescription="carousel" aria-label="{{ 'sections.testimonials.carousel_aria' | t }}">
     <div class="tst__track-wrap">
       <div class="tst__track" aria-live="polite" aria-atomic="false">
         {%- for block in section.blocks -%}
@@ -24,7 +24,7 @@
               assign has_image = true
             endif
           -%}
-          <article class="tst__slide" role="group" aria-roledescription="slide" aria-label="Testimonial {{ forloop.index }} of {{ block_count }}" aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+          <article class="tst__slide" role="group" aria-roledescription="slide" aria-label="{{ 'sections.testimonials.slide_aria' | t: index: forloop.index, total: block_count }}" aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
             <div class="tst__card">
               {%- if section.settings.show_quote_mark -%}
                 <div class="tst__quote-mark" aria-hidden="true"><svg width="36" height="28" viewBox="0 0 36 28" fill="none"><path d="M0 28V17.6C0 11.6 1.6 7.2 4.8 4.4C8 1.46667 12.5333 0 18.4 0V4.8C15.4667 4.8 13.2 5.6 11.6 7.2C10.1333 8.8 9.4 11.2 9.4 14.4H16.8V28H0ZM19.2 28V17.6C19.2 11.6 20.8 7.2 24 4.4C27.2 1.46667 31.7333 0 37.6 0V4.8C34.6667 4.8 32.4 5.6 30.8 7.2C29.3333 8.8 28.6 11.2 28.6 14.4H36V28H19.2Z" fill="currentColor"/></svg></div>
@@ -55,18 +55,18 @@
     </div>
     {%- if block_count > 1 -%}
       {%- if section.settings.show_arrows -%}
-        <button class="tst__arrow tst__arrow--prev" aria-label="Previous testimonial" type="button"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M12.5 5L7.5 10L12.5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <button class="tst__arrow tst__arrow--next" aria-label="Next testimonial" type="button"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="tst__arrow tst__arrow--prev" aria-label="{{ 'sections.testimonials.previous_aria' | t }}" type="button"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M12.5 5L7.5 10L12.5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="tst__arrow tst__arrow--next" aria-label="{{ 'sections.testimonials.next_aria' | t }}" type="button"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       {%- endif -%}
       {%- if section.settings.show_dots -%}
-        <div class="tst__dots" role="tablist" aria-label="Select testimonial">
+        <div class="tst__dots" role="tablist" aria-label="{{ 'sections.testimonials.select_aria' | t }}">
           {%- for block in section.blocks -%}
-            <button class="tst__dot{% if forloop.first %} tst__dot--active{% endif %}" role="tab" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="Go to testimonial {{ forloop.index }}" data-index="{{ forloop.index0 }}" type="button"></button>
+            <button class="tst__dot{% if forloop.first %} tst__dot--active{% endif %}" role="tab" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="{{ 'sections.testimonials.go_to_aria' | t: index: forloop.index }}" data-index="{{ forloop.index0 }}" type="button"></button>
           {%- endfor -%}
         </div>
       {%- endif -%}
       {%- if section.settings.autoplay and section.settings.show_pause_button -%}
-        <button class="tst__pause" aria-label="Pause auto-play" aria-pressed="false" type="button">
+        <button class="tst__pause" aria-label="{{ 'sections.testimonials.pause_aria' | t }}" aria-pressed="false" type="button">
           <svg class="tst__pause-icon tst__pause-icon--pause" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="4" y="3" width="3" height="10" rx="1" fill="currentColor"/><rect x="9" y="3" width="3" height="10" rx="1" fill="currentColor"/></svg>
           <svg class="tst__pause-icon tst__pause-icon--play" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 3L13 8L5 13V3Z" fill="currentColor"/></svg>
         </button>

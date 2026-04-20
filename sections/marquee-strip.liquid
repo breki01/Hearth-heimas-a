@@ -15,7 +15,7 @@
 <section
   id="marquee-{{ section.id }}"
   class="mq mq--{{ scheme }}"
-  aria-label="Features"
+  aria-label="{{ 'sections.marquee.aria' | t }}"
   style="--mq-pt: {{ section.settings.padding_top }}px; --mq-pb: {{ section.settings.padding_bottom }}px; --mq-speed: {{ speed }}s; --mq-font-size: {{ section.settings.font_size }}px;"
 >
   {%- if section.settings.strip_label != blank -%}

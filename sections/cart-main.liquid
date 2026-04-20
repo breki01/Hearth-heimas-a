@@ -12,16 +12,16 @@
   {%- if cart_empty -%}
     <div class="cart__empty">
       <div class="cart__empty-icon" aria-hidden="true"><svg width="56" height="56" viewBox="0 0 56 56" fill="none"><path d="M8 8H12L18 36H44L50 16H16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="22" cy="44" r="3.5" stroke="currentColor" stroke-width="1.6"/><circle cx="40" cy="44" r="3.5" stroke="currentColor" stroke-width="1.6"/></svg></div>
-      <h1 class="cart__empty-heading">{{ section.settings.empty_heading | default: 'Your cart is empty' }}</h1>
-      <p class="cart__empty-sub">{{ section.settings.empty_subheading | default: "Looks like you haven't added anything yet." }}</p>
+      <h1 class="cart__empty-heading">{%- if section.settings.empty_heading != blank -%}{{ section.settings.empty_heading | escape }}{%- else -%}{{ 'cart.general.empty' | t }}{%- endif -%}</h1>
+      <p class="cart__empty-sub">{%- if section.settings.empty_subheading != blank -%}{{ section.settings.empty_subheading | escape }}{%- else -%}{{ 'cart.general.empty_subheading' | t }}{%- endif -%}</p>
       {%- if section.settings.empty_button_label != blank -%}
         <a href="{{ section.settings.empty_button_link | default: '/collections/all' }}" class="cart__empty-btn">{{ section.settings.empty_button_label | escape }}</a>
       {%- endif -%}
     </div>
   {%- else -%}
     <div class="cart__header">
-      <h1 class="cart__title">Your cart</h1>
-      <span class="cart__count" aria-live="polite">{{ cart.item_count }} item{% if cart.item_count != 1 %}s{% endif %}</span>
+      <h1 class="cart__title">{{ 'cart.general.your_cart' | t }}</h1>
+      <span class="cart__count" aria-live="polite">{{ 'cart.items.count' | t: count: cart.item_count }}</span>
     </div>
 
     <div class="cart__body">
@@ -53,9 +53,9 @@
               {%- endif -%}
               <div class="cart__item-price-row">
                 <div class="cart__qty-ctrl" data-qty-ctrl="{{ item.key }}">
-                  <button type="button" class="cart__qty-btn" data-qty-change="{{ item.key }}" data-delta="-1" aria-label="Decrease quantity of {{ item.title | escape }}"><svg width="12" height="2" viewBox="0 0 12 2" fill="none"><path d="M1 1H11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
+                  <button type="button" class="cart__qty-btn" data-qty-change="{{ item.key }}" data-delta="-1" aria-label="{{ 'cart.items.decrease_aria' | t: title: item.title }}"><svg width="12" height="2" viewBox="0 0 12 2" fill="none"><path d="M1 1H11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
                   <span class="cart__qty-val" data-qty-val="{{ item.key }}" aria-live="polite">{{ item.quantity }}</span>
-                  <button type="button" class="cart__qty-btn" data-qty-change="{{ item.key }}" data-delta="1" aria-label="Increase quantity of {{ item.title | escape }}"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1V11M1 6H11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
+                  <button type="button" class="cart__qty-btn" data-qty-change="{{ item.key }}" data-delta="1" aria-label="{{ 'cart.items.increase_aria' | t: title: item.title }}"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1V11M1 6H11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
                 </div>
                 <div class="cart__item-prices">
                   <span class="cart__item-price" data-line-price="{{ item.key }}">{{ item.final_line_price | money }}</span>
@@ -64,7 +64,7 @@
                   {%- endif -%}
                 </div>
               </div>
-              <button type="button" class="cart__item-remove" data-remove="{{ item.key }}" aria-label="Remove {{ item.title | escape }} from cart">Remove</button>
+              <button type="button" class="cart__item-remove" data-remove="{{ item.key }}" aria-label="{{ 'cart.items.remove_aria' | t: title: item.title }}">{{ 'cart.items.remove' | t }}</button>
             </div>
           </div>
         {%- endfor -%}
@@ -72,7 +72,7 @@
 
       <div class="cart__summary" data-cart-summary>
         <div class="cart__summary-sticky">
-          <h2 class="cart__summary-heading">Order summary</h2>
+          <h2 class="cart__summary-heading">{{ 'cart.general.order_summary' | t }}</h2>
 
           <div class="cart__lines" data-cart-lines>
             {%- for item in cart.items -%}
@@ -95,10 +95,10 @@
           {%- endif -%}
 
           <div class="cart__subtotal-row">
-            <span class="cart__subtotal-label">Subtotal</span>
+            <span class="cart__subtotal-label">{{ 'cart.general.subtotal' | t }}</span>
             <span class="cart__subtotal-val" data-cart-subtotal>{{ cart.total_price | money }}</span>
           </div>
-          <p class="cart__tax-note">Taxes and shipping calculated at checkout</p>
+          <p class="cart__tax-note">{{ 'cart.general.taxes_and_shipping_at_checkout' | t }}</p>
 
           {%- form 'cart', cart, novalidate: 'novalidate' -%}
             {%- if section.settings.show_order_note -%}
@@ -107,10 +107,10 @@
                 <textarea id="cart-note-{{ section.id }}" name="note" class="cart__note-input" rows="3" placeholder="{{ section.settings.note_placeholder | default: 'Any special instructions?' }}" data-cart-note>{{ cart.note }}</textarea>
               </div>
             {%- endif -%}
-            <button type="submit" name="checkout" class="cart__checkout-btn">Proceed to checkout</button>
+            <button type="submit" name="checkout" class="cart__checkout-btn">{{ 'cart.general.proceed_to_checkout' | t }}</button>
           {%- endform -%}
 
-          <a href="{{ routes.all_products_collection_url }}" class="cart__continue">or continue shopping</a>
+          <a href="{{ routes.all_products_collection_url }}" class="cart__continue">{{ 'cart.general.continue_shopping_inline' | t }}</a>
 
           {%- if section.settings.show_trust -%}
             <div class="cart__trust" role="list">

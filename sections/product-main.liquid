@@ -11,9 +11,9 @@
 
 <div id="product-main-{{ section.id }}" class="pm pm--{{ scheme }}" data-section-id="{{ section.id }}">
 
-  <nav class="pm__breadcrumb" aria-label="Breadcrumb">
+  <nav class="pm__breadcrumb" aria-label="{{ 'products.product.breadcrumb_aria' | t }}">
     <ol class="pm__breadcrumb-list" role="list">
-      <li><a href="{{ routes.root_url }}">Home</a></li>
+      <li><a href="{{ routes.root_url }}">{{ 'products.product.breadcrumb_home' | t }}</a></li>
       {%- if product.collections.first -%}<li><a href="{{ product.collections.first.url }}">{{ product.collections.first.title | escape }}</a></li>{%- endif -%}
       <li aria-current="page">{{ product.title | escape }}</li>
     </ol>
@@ -25,7 +25,7 @@
       <div class="pm__gallery-main" data-gallery-main>
         {%- if has_images -%}
           {%- for media in product.media limit: 10 -%}
-            <div class="pm__media-slide{% if forloop.first %} pm__media-slide--active{% endif %}" data-media-index="{{ forloop.index0 }}" tabindex="0" role="button" aria-label="Image {{ forloop.index }}">
+            <div class="pm__media-slide{% if forloop.first %} pm__media-slide--active{% endif %}" data-media-index="{{ forloop.index0 }}" tabindex="0" role="button" aria-label="{{ 'products.product.image_aria' | t: index: forloop.index }}">
               {%- case media.media_type -%}
                 {%- when 'image' -%}
                   {{- media | image_url: width: 1200 | image_tag: loading: forloop.first | if_true: 'eager' | default: 'lazy', fetchpriority: forloop.first | if_true: 'high' | default: 'auto', sizes: '(max-width:899px) 90vw, 55vw', widths: '500,700,900,1200', class: 'pm__media-img', alt: media.alt | default: product.title | escape -}}
@@ -39,9 +39,9 @@
         {%- endif -%}
       </div>
       {%- if product.images.size > 1 -%}
-        <div class="pm__thumbnails" role="tablist" aria-label="Product images">
+        <div class="pm__thumbnails" role="tablist" aria-label="{{ 'products.product.product_images_aria' | t }}">
           {%- for media in product.media limit: 10 -%}
-            <button class="pm__thumb{% if forloop.first %} pm__thumb--active{% endif %}" role="tab" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" data-thumb-index="{{ forloop.index0 }}" type="button" aria-label="View image {{ forloop.index }}">
+            <button class="pm__thumb{% if forloop.first %} pm__thumb--active{% endif %}" role="tab" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" data-thumb-index="{{ forloop.index0 }}" type="button" aria-label="{{ 'products.product.view_image_aria' | t: index: forloop.index }}">
               {%- if media.media_type == 'image' -%}
                 {{- media | image_url: width: 160 | image_tag: loading: 'lazy', widths: '80,160', sizes: '80px', class: 'pm__thumb-img', alt: media.alt | default: '' -}}
               {%- else -%}
@@ -72,12 +72,12 @@
             <span class="pm__price-val pm__price-val--sale" data-current-price>{{ pr | money }}</span>
             <s class="pm__price-compare" data-compare-price>{{ cp | money }}</s>
             {%- assign saving = cp | minus: pr | times: 100 | divided_by: cp -%}
-            <span class="pm__price-badge">Save {{ saving }}%</span>
+            <span class="pm__price-badge">{{ 'products.general.save_percent_html' | t: percent: saving }}</span>
           {%- else -%}
             <span class="pm__price-val" data-current-price>{{ pr | money }}</span>
           {%- endif -%}
         </div>
-        {%- if product.variants.first.taxable -%}<p class="pm__tax-note">Tax included.</p>{%- endif -%}
+        {%- if product.variants.first.taxable -%}<p class="pm__tax-note">{{ 'products.general.tax_included' | t }}</p>{%- endif -%}
       </div>
 
       {%- form 'product', product, id: product_form_id, class: 'pm__form', novalidate: 'novalidate' -%}
@@ -130,7 +130,7 @@
                 </div>
               </div>
             {%- endfor -%}
-            <select name="id" class="pm__variant-select visually-hidden" data-variant-select aria-label="Select variant">
+            <select name="id" class="pm__variant-select visually-hidden" data-variant-select aria-label="{{ 'products.product.select_variant_aria' | t }}">
               {%- for variant in product.variants -%}
                 <option value="{{ variant.id }}"{% if variant == current_variant %} selected{% endif %}{% unless variant.available %} disabled{% endunless %}>{{ variant.title | escape }}</option>
               {%- endfor -%}
@@ -142,18 +142,18 @@
 
         {%- if section.settings.show_quantity -%}
           <div class="pm__qty">
-            <label class="pm__qty-label" for="pm-qty-{{ section.id }}">Quantity</label>
+            <label class="pm__qty-label" for="pm-qty-{{ section.id }}">{{ 'products.quantity.label' | t }}</label>
             <div class="pm__qty-ctrl">
-              <button type="button" class="pm__qty-btn" data-qty-dec aria-label="Decrease"><svg width="14" height="2" viewBox="0 0 14 2" fill="none"><path d="M1 1H13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
-              <input type="number" id="pm-qty-{{ section.id }}" name="quantity" class="pm__qty-input" value="1" min="1" aria-label="Quantity">
-              <button type="button" class="pm__qty-btn" data-qty-inc aria-label="Increase"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1V13M1 7H13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
+              <button type="button" class="pm__qty-btn" data-qty-dec aria-label="{{ 'products.quantity.decrease' | t }}"><svg width="14" height="2" viewBox="0 0 14 2" fill="none"><path d="M1 1H13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
+              <input type="number" id="pm-qty-{{ section.id }}" name="quantity" class="pm__qty-input" value="1" min="1" aria-label="{{ 'products.quantity.label' | t }}">
+              <button type="button" class="pm__qty-btn" data-qty-inc aria-label="{{ 'products.quantity.increase' | t }}"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1V13M1 7H13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
             </div>
           </div>
         {%- endif -%}
 
         <div class="pm__actions">
           <button type="submit" name="add" class="pm__atc-btn" data-atc-btn{% if current_variant.available == false %} disabled aria-disabled="true"{% endif %}>
-            <span class="pm__atc-text" data-atc-text>{%- if current_variant.available -%}Add to cart{%- else -%}Sold out{%- endif -%}</span>
+            <span class="pm__atc-text" data-atc-text>{%- if current_variant.available -%}{{ 'products.product.add_to_cart' | t }}{%- else -%}{{ 'products.product.sold_out' | t }}{%- endif -%}</span>
             <span class="pm__atc-loading" aria-hidden="true"><svg class="pm__spinner" width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="50 30"/></svg></span>
           </button>
           {%- if section.settings.show_dynamic_checkout -%}{{ form | payment_button }}{%- endif -%}
@@ -233,7 +233,7 @@
         <span class="pm-sticky__title">{{ product.title | escape }}</span>
         <span class="pm-sticky__price" data-sticky-price>{{ current_variant.price | money }}</span>
       </div>
-      <button type="button" class="pm-sticky__btn" data-sticky-atc>Add to cart</button>
+      <button type="button" class="pm-sticky__btn" data-sticky-atc>{{ 'products.product.add_to_cart' | t }}</button>
     </div>
   </div>
 {%- endif -%}
@@ -426,11 +426,11 @@
       if (variant.available) {
         atcBtn.disabled = false;
         atcBtn.removeAttribute('aria-disabled');
-        atcText.textContent = 'Add to cart';
+        atcText.textContent = {{ 'products.product.add_to_cart' | t | json }};
       } else {
         atcBtn.disabled = true;
         atcBtn.setAttribute('aria-disabled', 'true');
-        atcText.textContent = 'Sold out';
+        atcText.textContent = {{ 'products.product.sold_out' | t | json }};
       }
     }
 

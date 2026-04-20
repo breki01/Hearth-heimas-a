@@ -13,7 +13,7 @@
     data-section-id="{{ section.id }}"
     style="--ab-bg: {{ section.settings.bg_color }}; --ab-text: {{ section.settings.text_color }};"
     role="region"
-    aria-label="Announcements"
+    aria-label="{{ 'sections.header.announcements_aria' | t }}"
   >
     {%- for block in section.blocks -%}
       {%- if block.settings.text != blank -%}

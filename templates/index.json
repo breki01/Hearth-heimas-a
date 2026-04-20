@@ -86,7 +86,7 @@
         "mq-6"
       ],
       "settings": {
-        "strip_label": "Why Hearth",
+        "strip_label": "Hvers vegna Hearth?",
         "scroll_speed": 90,
         "scroll_direction": "left",
         "separator_style": "flame",

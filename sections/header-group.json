@@ -36,7 +36,7 @@
     "header": {
       "type": "header",
       "settings": {
-        "logo_width": 140,
+        "logo_width": 120,
         "header_menu": "main-menu",
         "header_sticky": true,
         "header_transparent": true,

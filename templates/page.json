@@ -108,7 +108,7 @@
       ],
       "name": "FAQ page",
       "settings": {
-        "show_page_title": true,
+        "show_page_title": false,
         "title_alignment": "center",
         "show_hero": false,
         "hero_height": 420,
